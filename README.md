@@ -1,8 +1,23 @@
 # Stage Manager Skills
-
 **Artful Making skills for vibe coders** — helping you maintain agency, coherence, and soul while building with AI coding tools.
 
 Part of [Stage Manager](https://stage-manager.ai) by [Manifest AI](https://github.com/Mnfst-AI).
+
+---
+
+> *How you move through your work is what you build.*
+
+The builders who lead aren't the fastest coders. They're the ones who can hold the plot, maintain trajectory, and keep the soul of the work intact while the AI runs at speed.
+
+That's a practice. And like any practice, it needs a ritual.
+
+Before your next build session, try this:
+1. **Gratitude** — name one thing you're grateful for in this work
+2. **One Thing** — what's the single most important thing to accomplish today?
+3. **What you need** — what context, clarity, or resource do you need to do it?
+4. **What you want** — what does done feel like? What does it make possible?
+
+These skills help you carry that intention into your build — and keep it alive when the AI wants to run ahead of you.
 
 ---
 
@@ -15,7 +30,6 @@ claude /plugin install stage-manager
 ---
 
 ## What's Here
-
 Skills that run *before* and *alongside* your coding sessions — not after things go wrong.
 
 ### Skills
@@ -43,14 +57,25 @@ Find every place where the spec or prototype has already committed to a conventi
 
 Most vibe coders lose agency when AI tools collapse option space too fast. These skills expand options before converging — guided by future intent and artful making practice.
 
+This is Conway's Law for a single person: the quality of presence you bring to each increment shapes the shape of what emerges. Not just the code — the decisions, the architecture, the soul of the thing you're building.
+
+The goal isn't speed. It's **deliberate unfolding** — staging the ascent, not the spiral down. Moving above the line with responsibility, toward the place where you can let the work flow through you.
+
 Two lenses are live. More coming:
 - **Risk Sequence** — order your build to surface the riskiest assumptions first
 - **Chunking** — break work into flow-cycle-sized pieces a coding tool can execute cleanly
 
 ---
 
-## Contributing
+## Want the Full Sequencing Experience?
 
+These skills are the on-ramp. [Stage Manager](https://stage-manager.ai) is the full practice — a lightweight scaffolding tool that helps you sequence your work by story, maintain plot and trajectory across a build, and keep the soul of your design intact from first spark to shipped increment.
+
+Start with the skills. Feel what deliberate unfolding feels like. Then bring it to your team.
+
+---
+
+## Contributing
 Found a pattern these skills miss? Built a better version for a specific document type?
 
 Fork, improve, submit a PR. The skill library grows from the community.
