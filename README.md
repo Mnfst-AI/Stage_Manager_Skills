@@ -2,7 +2,7 @@
 
 > **How you move through your work is what you build.**
 
-A free, open collection of skills for vibe coders who want to stay the author while building with AI tools.
+A free, open collection of 10 skills for vibe coders who want to stay the author while building with AI tools.
 
 These skills help you expand options before converging, maintain coherence across a build, and keep the soul of the work intact while Claude Code, Cursor, Replit, or any agentic coding tool runs at speed.
 
@@ -22,23 +22,15 @@ They work best in sequence — but any one of them works on its own.
 
 Stage Manager organizes the builder's work into three nodes:
 
-**Sense** — noticing what wants to be built before building starts  
 **Shape** — exploring the problem space before converging on a solution  
-**Stage** — building in small, intentional increments with full agency
+**Stage** — building in small, intentional increments with full agency  
+**All Nodes** — coherence checks that run at any transition point
 
 The skills support every phase — and the transitions between them.
 
 ---
 
 ## The 13 Skills
-
-### Sense Node
-
-| Skill | What It Does |
-|---|---|
-| **Opening Ritual** | Four questions to enter the work with intention — gratitude, one thing, what you need, what you want. Puts you above the line before the first decision. |
-| **Closing Ritual** | Four questions to close a session with care — what landed, what got built, what you learned, what the next session needs. Creates continuity across sessions. |
-| **Pattern Connect** | Finds the thread running through your sparks and observations. Turns scattered sensing into a story worth building. |
 
 ### Shape Node
 
@@ -80,7 +72,7 @@ The skills support every phase — and the transitions between them.
 
 **Soul Check** is a deep read on a single artifact — 10–15 minutes. **Coherence Check** is the lightweight transition gate — 2 minutes, any artifact, any moment of doubt.
 
-**Opening Ritual** and **Closing Ritual** are two ends of the same thread. The closing ritual's answer to "what does the next session need?" becomes the opening ritual's "one thing."
+**Shape-to-Stage Gate** runs once, at the boundary between shaping and staging, before Chunking begins. **Output Review** closes the Stage loop after each prompt runs.
 
 ---
 
@@ -103,9 +95,6 @@ Each SKILL.md contains:
 
 ```
 plugins/stage-manager/skills/
-  sense-opening-ritual/SKILL.md
-  sense-closing-ritual/SKILL.md
-  sense-pattern-connect/SKILL.md
   shape-find-holes/SKILL.md
   shape-collapsed-options/SKILL.md
   shape-risk-sequence/SKILL.md
@@ -149,6 +138,7 @@ Read a skill before starting work. Use it as a checklist or reflection guide. Th
 
 - Shared references: `invention-zones.md`, `tool-selection-zones.md`, `breakthrough-dimensions.md`
 - Card creation skills: Intention Cards, Story Cards, Script Cards
+- Session skills (Opening Ritual, Closing Ritual, Pattern Connect) — available inside Stage Manager where session continuity supports them
 - Wisdom packs — user-owned domain context that travels across tools
 - Stage Manager — the full practice built on this foundation
 
