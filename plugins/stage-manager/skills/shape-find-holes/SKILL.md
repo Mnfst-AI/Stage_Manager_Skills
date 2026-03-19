@@ -82,9 +82,15 @@ One additional sentence: what is this work trying to do? Name the animating inte
 
 Present 4-7 holes. Curate ruthlessly. Order by impact — holes closest to the animating intent come first.
 
+Score each hole with a priority:
+
+- **P1** — Fix this or waste 10x more time later. The coding tool's invention here will compound downstream and touch the animating intent.
+- **P2** — Good idea to address, but optional. The tool's default will be tolerable if the builder is aware of it.
+- **P3** — Don't worry. Peripheral, containable, or fixable later without cost.
+
 For each hole:
 
-**[Short name]**
+**[Short name]** — **Priority: P1/P2/P3**
 
 > *[Exact quote from the document]*
 
@@ -111,11 +117,72 @@ Two or three things ready to hand to a coding tool right now — fully specified
 
 ---
 
-### The One Move
+### Close the Holes
 
-One clear action. Specific to this document. The single thing that closes the most risk before building starts.
+After presenting the analysis, walk the builder through resolving the holes interactively. One at a time. Never dump them all at once.
 
-Not generic advice. The exact next step.
+---
+
+**Step 1: The One Move**
+
+Start with the highest-impact P1 hole. Present resolution using the interaction mode that fits:
+
+- **Options** — when there are 2-4 clear alternatives the builder can pick from. Use the AskUserQuestion tool to present choice boxes. Example: "Which auth strategy?" with options like "Auth provider (Clerk, Auth0)", "Edge function with refresh tokens", "Client-only OAuth (accept 1-hour expiry)."
+
+- **Confirm a suggestion** — when there's one obvious right answer and the builder just needs to OK it. Present your recommendation and ask for confirmation. Example: "Add wind direction as a required filter alongside speed — sound right?"
+
+- **Open question** — when the answer requires domain knowledge only the builder has. Ask the question directly in chat and wait for their answer. Example: "What hours of the day should be eligible for blocking?"
+
+Wait for the builder's answer before proceeding. Briefly acknowledge the decision and note how it closes the hole.
+
+---
+
+**Step 2: Remaining P1s**
+
+After The One Move is resolved, walk the builder through remaining P1 holes one at a time. Use the same mixed interaction approach — match the mode to the hole.
+
+After all P1s are resolved, tell the builder: *"P1 holes are closed. There are [N] P2 items — good ideas but optional. Want to work through them, or move on?"*
+
+---
+
+**Step 3: Optional P2 walkthrough**
+
+If the builder says yes — walk through P2s the same way, one at a time.
+
+If no — note the P2s as conscious tradeoffs the builder is accepting. Name them in one sentence each so there's a record.
+
+P3s are never walked through. They're listed in the analysis for awareness only.
+
+---
+
+**Step 4: The builder can say "skip" at any point.** Respect it. Note what was skipped and its likely consequence in one sentence. Then move to the next hole.
+
+---
+
+### What's Next
+
+After holes are resolved (or the builder says they're done), guide the exit.
+
+**Other shaping skills:**
+
+Ask the builder: *"Before we move to building, would you like to run any other shaping skills on this spec?"*
+
+Present as options using AskUserQuestion:
+- **Collapsed Options** — finds decisions you've already committed to without knowing it, especially around what makes this different
+- **Risk Sequence** — surfaces load-bearing assumptions and sequences them by cost-if-wrong
+- **Soul Check** — deep read on whether the original animating idea is still alive after these changes
+- **I'm done shaping** — move to final output
+
+If they run another skill, return here when that skill completes and ask again.
+
+**Final output:**
+
+When the builder is done with all shaping, ask: *"How would you like to proceed?"*
+
+Present as options using AskUserQuestion:
+- **Write as .md** — save the corrected spec as a markdown document
+- **Submit to Chunking** — hand the spec to the Chunking skill to break it into buildable pieces
+- **Both** — write the .md and then run Chunking on it
 
 ---
 
@@ -126,6 +193,8 @@ Not generic advice. The exact next step.
 - Specific over general, always
 - Five strong findings beats fifteen weak ones
 - End with what's possible, not just what's missing
+- The interactive phase is coaching, not a form — one hole at a time, acknowledge each answer, then move on
+- Match the interaction to the hole — options for clear alternatives, confirmation for obvious fixes, open questions for domain knowledge
 
 ---
 
