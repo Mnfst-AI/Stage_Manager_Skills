@@ -48,7 +48,6 @@ if [[ -f "$SCRIPT_DIR/.claude-plugin/plugin.json" ]]; then
 elif [[ -f ".claude-plugin/plugin.json" ]]; then
     REPO_DIR="$(pwd)"
 else
-    # Running via curl — clone to a temp location
     info "Cloning Stage Manager repo..."
     TMPDIR_CLONE="$(mktemp -d)"
     git clone -b enhanced-cli-skills --depth 1 https://github.com/Mnfst-AI/Stage_Manager_Skills.git "$TMPDIR_CLONE/Stage_Manager_Skills" 2>/dev/null
@@ -69,7 +68,6 @@ CE_BACKUP_DIR="$COMMANDS_DIR/ce.backup"
 
 CE_FILES=(brainstorm.md compound.md plan.md review.md work.md)
 
-# Check Claude Code is set up
 if [[ ! -d "$CLAUDE_DIR" ]]; then
     mkdir -p "$CLAUDE_DIR"
     info "Created $CLAUDE_DIR"
@@ -84,7 +82,6 @@ CE_REPO_URL="https://github.com/EveryInc/compound-engineering-plugin.git"
 CLEANUP_CE_CLONE=false
 
 if [[ -d "$CE_DIR" ]]; then
-    # ── CE already installed — check it's complete ──
     CE_COMPLETE=true
     for f in "${CE_FILES[@]}"; do
         if [[ ! -f "$CE_DIR/$f" ]]; then
@@ -96,7 +93,6 @@ if [[ -d "$CE_DIR" ]]; then
     if [[ "$CE_COMPLETE" == "true" ]]; then
         ok "Compound Engineering found at $CE_DIR"
 
-        # Back up originals
         if [[ -d "$CE_BACKUP_DIR" ]]; then
             warn "Backup already exists at $CE_BACKUP_DIR — skipping backup"
         else
@@ -117,7 +113,6 @@ else
 fi
 
 if [[ "${CE_NEEDS_INSTALL:-false}" == "true" ]]; then
-    # ── Install stock CE from EveryInc repo ──
     info "Cloning Compound Engineering from Every.io..."
     CE_TMPDIR="$(mktemp -d)"
     CLEANUP_CE_CLONE=true
@@ -128,11 +123,8 @@ if [[ "${CE_NEEDS_INSTALL:-false}" == "true" ]]; then
 
     ok "Compound Engineering cloned"
 
-    # Find the CE command files in the cloned repo
-    # CE plugin structure: commands/ or .claude/commands/ce/ — search for the .md files
     CE_SOURCE_DIR=""
 
-    # Check common locations in the CE repo
     for candidate in \
         "$CE_TMPDIR/ce-plugin/.claude/commands/ce" \
         "$CE_TMPDIR/ce-plugin/commands/ce" \
@@ -147,7 +139,6 @@ if [[ "${CE_NEEDS_INSTALL:-false}" == "true" ]]; then
         fi
     done
 
-    # If not found in standard locations, search for them
     if [[ -z "$CE_SOURCE_DIR" ]]; then
         FOUND_BRAINSTORM="$(find "$CE_TMPDIR/ce-plugin" -name "brainstorm.md" -path "*/ce/*" 2>/dev/null | head -1)"
         if [[ -n "$FOUND_BRAINSTORM" ]]; then
@@ -155,7 +146,6 @@ if [[ "${CE_NEEDS_INSTALL:-false}" == "true" ]]; then
         fi
     fi
 
-    # Last resort: find any brainstorm.md
     if [[ -z "$CE_SOURCE_DIR" ]]; then
         FOUND_BRAINSTORM="$(find "$CE_TMPDIR/ce-plugin" -name "brainstorm.md" 2>/dev/null | head -1)"
         if [[ -n "$FOUND_BRAINSTORM" ]]; then
@@ -170,7 +160,6 @@ if [[ "${CE_NEEDS_INSTALL:-false}" == "true" ]]; then
 
     info "Found CE commands at: $CE_SOURCE_DIR"
 
-    # Install stock CE commands
     mkdir -p "$CE_DIR"
     for f in "${CE_FILES[@]}"; do
         if [[ -f "$CE_SOURCE_DIR/$f" ]]; then
@@ -180,7 +169,6 @@ if [[ "${CE_NEEDS_INSTALL:-false}" == "true" ]]; then
         fi
     done
 
-    # Also install CE skills if they exist
     CE_SKILLS_DIR=""
     for candidate in \
         "$CE_TMPDIR/ce-plugin/.claude/skills" \
@@ -197,7 +185,6 @@ if [[ "${CE_NEEDS_INSTALL:-false}" == "true" ]]; then
         ok "CE skills installed"
     fi
 
-    # Back up the stock CE we just installed before overlaying
     mkdir -p "$CE_BACKUP_DIR"
     for f in "${CE_FILES[@]}"; do
         if [[ -f "$CE_DIR/$f" ]]; then
@@ -239,13 +226,11 @@ SKILL_DIRS=(
     shape-collapsed-options
     shape-risk-sequence
     shape-soul-check
+    shape-brief
     shape-to-stage-gate
     stage-chunking
-    stage-wsjf
     stage-prompt-craft
-    stage-prompt-guard
     stage-live-mirror
-    stage-output-review
     stage-decision-capture
     coherence-check
 )
@@ -264,16 +249,13 @@ for skill in "${SKILL_DIRS[@]}"; do
     fi
 
     if [[ -L "$TARGET" ]]; then
-        # Already a symlink — check if it points to the right place
         CURRENT_TARGET="$(readlink "$TARGET")"
         if [[ "$CURRENT_TARGET" == "$SOURCE" ]]; then
             ((SKIPPED++))
             continue
         fi
-        # Points somewhere else — remove and re-link
         rm "$TARGET"
     elif [[ -d "$TARGET" ]]; then
-        # Real directory — back it up
         warn "Existing skill directory at $TARGET — backing up to ${TARGET}.bak"
         mv "$TARGET" "${TARGET}.bak"
     fi
@@ -306,15 +288,13 @@ info "Verifying installation..."
 
 ERRORS=0
 
-# Check CE commands have Stage Manager references
 for f in "${CE_FILES[@]}"; do
-    if ! grep -qi "stage.manager\|coherence\|soul.check\|find.the.holes" "$CE_DIR/$f" 2>/dev/null; then
+    if ! grep -qi "stage.manager\|coherence\|soul.check\|find.the.holes\|shape.brief" "$CE_DIR/$f" 2>/dev/null; then
         warn "  $CE_DIR/$f may not have Stage Manager integration"
         ((ERRORS++))
     fi
 done
 
-# Check skills are accessible
 for skill in "${SKILL_DIRS[@]}"; do
     if [[ ! -f "$SKILLS_DIR/$skill/SKILL.md" ]]; then
         warn "  Skill not accessible: $skill"
@@ -344,22 +324,25 @@ echo ""
 echo -e "${BOLD}═══ Installation Complete ═══${NC}"
 echo ""
 echo "  Enhanced CE commands:  $CE_DIR"
-echo "  Original CE backup:   $CE_BACKUP_DIR"
+echo "  Original CE backup:    $CE_BACKUP_DIR"
 echo "  Stage Manager skills:  $SKILLS_DIR"
 echo ""
-echo "  Slash commands now available in Claude Code:"
+echo "  ── The Shape Brief Flow ──"
+echo "  Run shape skills → /shape-brief"
+echo "  Accept/reject inline changes →"
+echo "    Stage_Manager_Brief.md + [Spec_Name]-Staged.md"
+echo "  → /ce:brainstorm, /ce:plan, or /ce:work"
 echo ""
 echo "  CE Pipeline (with Stage Manager gates):"
 echo "    /ce:brainstorm  /ce:plan  /ce:work  /ce:review  /ce:compound"
 echo ""
 echo "  Stage Manager — Shape:"
 echo "    /shape-find-holes  /shape-collapsed-options  /shape-risk-sequence"
-echo "    /shape-soul-check  /sense-shape-to-stage-gate"
+echo "    /shape-soul-check  /shape-brief  /sense-shape-to-stage-gate"
 echo ""
 echo "  Stage Manager — Stage:"
-echo "    /stage-chunking  /stage-wsjf  /stage-prompt-craft"
-echo "    /stage-prompt-guard  /stage-live-mirror"
-echo "    /stage-output-review  /stage-decision-capture"
+echo "    /stage-chunking  /stage-prompt-craft"
+echo "    /stage-live-mirror  /stage-decision-capture"
 echo ""
 echo "  Stage Manager — Any Node:"
 echo "    /coherence-check"

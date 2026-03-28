@@ -1,7 +1,7 @@
 {
   "name": "stage-manager",
-  "version": "0.3.0",
-  "description": "Artful Making skills for vibe coders. 13 skills across the Shape-to-Stage flow cycle — the mirror never goes dark.",
+  "version": "0.4.0",
+  "description": "Artful Making skills for vibe coders. 11 skills across the Shape-to-Stage flow cycle — shape your spec, brief it, stage it clean. The mirror never goes dark.",
   "author": "Manifest AI",
   "license": "MIT",
   "skills": [
@@ -9,13 +9,11 @@
     "plugins/stage-manager/skills/shape-collapsed-options",
     "plugins/stage-manager/skills/shape-risk-sequence",
     "plugins/stage-manager/skills/shape-soul-check",
+    "plugins/stage-manager/skills/shape-brief",
     "plugins/stage-manager/skills/shape-to-stage-gate",
     "plugins/stage-manager/skills/stage-chunking",
-    "plugins/stage-manager/skills/stage-wsjf",
     "plugins/stage-manager/skills/stage-prompt-craft",
-    "plugins/stage-manager/skills/stage-prompt-guard",
     "plugins/stage-manager/skills/stage-live-mirror",
-    "plugins/stage-manager/skills/stage-output-review",
     "plugins/stage-manager/skills/stage-decision-capture",
     "plugins/stage-manager/skills/coherence-check"
   ]

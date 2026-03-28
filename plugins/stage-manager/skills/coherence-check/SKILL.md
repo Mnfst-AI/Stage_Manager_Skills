@@ -1,6 +1,6 @@
 ---
 name: coherence-check
-description: Stop and check whether the work in progress is still coherent — still pointing at the original intent, still serving the right user, still worth building in this form. Use this skill when a builder senses something is off but can't name it, feels like the work has drifted, wants to reset before continuing, asks "are we still on track," "does this still make sense," or "should we keep going." Also use at natural transition points — between shaping and staging, between chunks, after unexpected results from a coding tool, or whenever the plot feels lost. Can be run on any artifact: a prompt, a chunk, a PRD, a conversation, a set of cards. This is a lightweight gate — 2 minutes at any transition point. For a deep read of whether a full artifact still has soul, use Soul Check instead. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
+description: Stop and check whether the work in progress is still coherent — still pointing at the original intent, still serving the right user, still worth building in this form. Use this skill when a builder senses something is off but can't name it, feels like the work has drifted, wants to reset before continuing, asks "are we still on track," "does this still make sense," or "should we keep going." Also use at natural transition points — between chunks, after unexpected results from a coding tool, or whenever the plot feels lost mid-build. Can be run on any artifact: a prompt, a chunk, a PRD, a conversation, a set of cards. This is a lightweight gate — 2 minutes at any transition point. For the full shape/stage boundary synthesis with inline change suggestions and a staged spec, use Shape Brief instead. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
 ---
 
 # Stage Manager — Coherence Check
@@ -12,6 +12,16 @@ Your job: read what's in front of you — whatever form it takes — and check w
 This is not a quality review. Not a critique. A coherence check is a moment of honest looking — the discipline of pausing before continuing, so that what gets built next is built on solid ground.
 
 How you move through your work is what you build. Incoherence that goes unnamed becomes architecture.
+
+---
+
+## When to Use This vs. Shape Brief
+
+**Coherence Check** — lightweight, 2 minutes, any moment mid-build when something feels off. Run it when you're in the middle of staging or coding and something loses the thread.
+
+**Shape Brief** — heavyweight synthesis at the shape/stage boundary. Run it after one or more shape skills complete, before handing off to CE or Superpowers. It produces inline change suggestions, `Stage_Manager_Brief.md`, and `[filename]-Staged.md`.
+
+The rule: if you're at the shape/stage boundary with shape skill output in hand — use Shape Brief. If you're mid-build and something feels off — use Coherence Check.
 
 ---
 
@@ -37,7 +47,7 @@ A coherence check can be run on anything. The builder may bring a full PRD, a si
 
 The gap between those two answers is the coherence check.
 
-**If they bring a transition point** — moving from shaping to staging, between chunks, after a coding tool produced something unexpected — run a quick three-question check before continuing:
+**If they bring a transition point** — between chunks, after a coding tool produced something unexpected — run a quick three-question check before continuing:
 
 1. *"Is the original intent still alive in what we have?"*
 2. *"Is the next step still serving that intent?"*
@@ -55,7 +65,7 @@ These are the questions underneath every coherence check. You don't always ask t
 
 **1. Intent** — is the original animating idea still alive in this work? Or has it been diluted, replaced, or quietly abandoned?
 
-**2. User** — is the person this was built for still at the center of every decision? Or has the work started optimizing for something else — technical elegance, completeness, speed?
+**2. User** — is the person this was built for still at the center of every decision? Or has the work started optimizing for something else?
 
 **3. Sequence** — is the next step still the right next step? Or has something shifted that changes what should happen now?
 
@@ -79,7 +89,7 @@ Name what's no longer coherent — if anything. Be specific. Quote the artifact 
 
 Not a list of everything that could be better. The one or two things that, if left unnamed, will compound into bigger problems downstream.
 
-If nothing has shifted — say so directly. *"This is coherent. The original intent is alive. The next step is right. Keep going."* That's a valid and useful coherence check result.
+If nothing has shifted — say so directly. *"This is coherent. The original intent is alive. The next step is right. Keep going."* That's a valid and useful result.
 
 ---
 
@@ -107,14 +117,12 @@ One question. Not a list.
 
 ---
 
-## When to Stop vs When to Continue
-
-Not every drift is worth stopping for. Help the builder calibrate:
+## When to Stop vs. When to Continue
 
 **Stop and realign when:**
 - The original intent has been replaced, not just refined
 - The user at the center has shifted
-- The next step is building on an assumption that hasn't been validated
+- The next step is building on an unvalidated assumption
 - Something feels wrong and the builder can't name it — that feeling is data
 
 **Continue when:**
@@ -123,7 +131,7 @@ Not every drift is worth stopping for. Help the builder calibrate:
 - The cost of stopping is higher than the cost of the drift
 - Everything checks out and the work is coherent
 
-The goal is not to stop often. The goal is to stop at the right moments — so that everything built after is built on solid ground.
+The goal is not to stop often. The goal is to stop at the right moments.
 
 ---
 
@@ -147,16 +155,19 @@ Structure output for scanability in terminal and Claude Code:
 ## Tone Reminders
 
 - Calm over alarming — a coherence check is a pause, not a crisis
-- Specific over general — name the exact place where drift is visible, not a vague sense of wrongness
+- Specific over general — name the exact place where drift is visible
 - Anchors first — what's still true before what's shifted
 - The builder decides — present the choice, don't make it for them
 - Two minutes when things are fine — don't make this heavier than it needs to be
 - "Keep going" is a valid result — coherence confirmed is as useful as drift detected
+- If at the shape/stage boundary with shape skill output — redirect to Shape Brief
 
 ---
 
 ## Part of Stage Manager
 
-This is the **Coherence Check** lens. Lightweight transition gate at any point. Soul Check is the deep read on a single artifact.
+This is the **Coherence Check** lens. Lightweight transition gate at any point mid-build or mid-session.
+
+**Use Shape Brief instead** when you're at the shape/stage boundary with shape skill output — it produces inline change suggestions, `Stage_Manager_Brief.md`, and `[filename]-Staged.md`.
 
 → github.com/Mnfst-AI/Stage_Manager_Skills

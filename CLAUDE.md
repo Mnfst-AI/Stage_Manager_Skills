@@ -1,6 +1,6 @@
 # Stage Manager — Artful Making Skill Library
 
-A collection of 13 skills for vibe coders who use agentic coding tools (Claude Code, Cursor, Replit). Skills are organized across the Shape-to-Stage flow cycle. The mirror never goes dark.
+A collection of 11 skills for vibe coders who use agentic coding tools (Claude Code, Cursor, Replit). Skills are organized across the Shape-to-Stage flow cycle. The mirror never goes dark.
 
 ## Available Slash Commands
 
@@ -9,25 +9,41 @@ A collection of 13 skills for vibe coders who use agentic coding tools (Claude C
 - `/shape-collapsed-options` — Find decisions made before the builder knew they were making them
 - `/shape-risk-sequence` — Surface load-bearing assumptions and sequence by cost-if-wrong
 - `/shape-soul-check` — Deep read on whether the original animating idea is still alive
+- `/shape-brief` — Synthesize shape skill output into ranked top-three problems, inline change suggestions, `Stage_Manager_Brief.md`, and `[Spec_Name]-Staged.md` — the handoff to CE or Superpowers
 
 ### Transition
 - `/sense-shape-to-stage-gate` — Five readiness questions before crossing from shaping to staging
 
 ### Stage (before, during, and after the build)
-- `/stage-chunking` — Break work into flow-cycle-sized pieces for clean prompting
-- `/stage-wsjf` — Sequence stories by weighted cost of delay
+- `/stage-chunking` — Break work into flow-cycle-sized pieces sequenced by cost of delay (economic, risk, flow, joy)
 - `/stage-prompt-craft` — Turn shaped chunks into scoped, guardrailed prompts
-- `/stage-prompt-guard` — Annotate prompts to flag the prompt's own invisible decisions before coding
 - `/stage-live-mirror` — Compare plan vs. code output per-session, surface what the tool invented
-- `/stage-output-review` — Review coding tool output against definition of done and intent
 - `/stage-decision-capture` — Full decisions-made manifest after a build, feeds forward into learning
 
 ### Any Node
-- `/coherence-check` — Lightweight 2-minute gate at any transition point
+- `/coherence-check` — Lightweight 2-minute gate at any transition point mid-build. For the shape/stage boundary, use `/shape-brief` instead.
+
+## The Shape Brief Flow
+
+Run any shape skills, then run `/shape-brief` to synthesize. It will:
+
+1. Rank the top three problem areas across all skill output (scored by frequency + severity + proximity to core intent)
+2. Present inline change suggestions — you accept, reject, or modify each one
+3. Generate `Stage_Manager_Brief.md` — the handoff document
+4. Write `[Spec_Name]-Staged.md` — the original spec with accepted changes applied
+
+Then choose your handoff path:
+- **Brief only** — paste `Stage_Manager_Brief.md` into CE or Superpowers
+- **Brief + original spec** — when the full source context matters
+- **Brief + Staged spec** — when you walked through fixes and want the next tool building from the resolved version
 
 ## Compound Engineering Integration
 
-Modified CE commands that integrate Stage Manager at every phase live in `plugins/compound-engineering/commands/ce/`. These are a fork of the standard CE pipeline with shaping gates, live mirror checkpoints, and decision capture built in.
+Modified CE commands that integrate Stage Manager at every phase live in `plugins/compound-engineering/commands/ce/`. Stage Manager gates are woven into brainstorm, plan, work, review, and compound — with Shape Brief as the canonical pre-planning handoff.
+
+## Superpowers Integration
+
+Stage Manager shapes your spec before Superpowers executes it. Run shape skills, run `/shape-brief`, then hand the two output documents to Superpowers as the starting context. Superpowers handles all planning and execution interaction from there.
 
 ## Shared References
 

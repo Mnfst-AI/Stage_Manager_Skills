@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
 #
-# Stage Manager — Standalone Installer
+# Stage Manager — Superpowers Installer
 #
-# Installs all 11 Stage Manager skills into Claude Code as slash commands.
-# Does NOT require Compound Engineering or Superpowers.
-#
-# For the enhanced CE integration, use install-enhanced-ce.sh instead.
-# For the Superpowers integration, use install-superpowers.sh instead.
+# Installs all 11 Stage Manager skills into Claude Code alongside Superpowers.
+# Does NOT modify Superpowers commands — Stage Manager and Superpowers stay
+# independent. Shape with Stage Manager, then hand off to Superpowers.
 #
 # Usage:
 #   git clone https://github.com/Mnfst-AI/Stage_Manager_Skills.git
 #   cd Stage_Manager_Skills
-#   bash install.sh
+#   bash install-superpowers.sh
 #
 
 set -euo pipefail
@@ -30,7 +28,7 @@ warn()  { echo -e "${YELLOW}⚠${NC} $1"; }
 fail()  { echo -e "${RED}✗${NC} $1"; exit 1; }
 
 echo ""
-echo -e "${BOLD}═══ Stage Manager — Skill Installer ═══${NC}"
+echo -e "${BOLD}═══ Stage Manager — Superpowers Installer ═══${NC}"
 echo ""
 
 # ═══ Step 1: Locate the repo ═══
@@ -47,10 +45,11 @@ fi
 
 info "Using repo at: $REPO_DIR"
 
-# ═══ Step 2: Check prerequisites ═══
+# ═══ Step 2: Check for Superpowers ═══
 
 CLAUDE_DIR="$HOME/.claude"
 SKILLS_DIR="$CLAUDE_DIR/skills"
+COMMANDS_DIR="$CLAUDE_DIR/commands"
 
 if [[ ! -d "$CLAUDE_DIR" ]]; then
     mkdir -p "$CLAUDE_DIR"
@@ -58,6 +57,45 @@ if [[ ! -d "$CLAUDE_DIR" ]]; then
 fi
 
 mkdir -p "$SKILLS_DIR"
+
+# Check if Superpowers is installed
+SUPERPOWERS_FOUND=false
+
+# Common Superpowers locations
+for candidate in \
+    "$SKILLS_DIR/superpowers" \
+    "$COMMANDS_DIR/superpowers" \
+    "$CLAUDE_DIR/plugins/superpowers"; do
+    if [[ -d "$candidate" ]]; then
+        SUPERPOWERS_FOUND=true
+        ok "Superpowers found at $candidate"
+        break
+    fi
+done
+
+# Also check for Superpowers skill files
+if [[ "$SUPERPOWERS_FOUND" == "false" ]]; then
+    if find "$SKILLS_DIR" -name "*.md" -exec grep -l "superpowers\|using-superpowers" {} \; 2>/dev/null | head -1 | grep -q .; then
+        SUPERPOWERS_FOUND=true
+        ok "Superpowers skills detected"
+    fi
+fi
+
+if [[ "$SUPERPOWERS_FOUND" == "false" ]]; then
+    warn "Superpowers not detected in ~/.claude/"
+    echo ""
+    echo "  Stage Manager works best alongside Superpowers."
+    echo "  Install Superpowers first via the Anthropic Claude Code marketplace,"
+    echo "  or from: https://github.com/obra/superpowers"
+    echo ""
+    read -r -p "  Continue installing Stage Manager anyway? [y/N] " response
+    if [[ ! "$response" =~ ^[Yy]$ ]]; then
+        echo ""
+        info "Install Superpowers first, then re-run this script."
+        exit 0
+    fi
+    echo ""
+fi
 
 # ═══ Step 3: Install Stage Manager skills ═══
 
@@ -154,32 +192,33 @@ echo ""
 echo -e "${BOLD}═══ Installation Complete ═══${NC}"
 echo ""
 echo "  Stage Manager skills: $SKILLS_DIR"
+echo "  Superpowers: untouched"
 echo ""
-echo "  Slash commands now available in Claude Code:"
+echo "  ── How to use Stage Manager with Superpowers ──"
 echo ""
-echo "  Shape:"
-echo "    /shape-find-holes  /shape-collapsed-options  /shape-risk-sequence"
-echo "    /shape-soul-check  /sense-shape-to-stage-gate"
+echo "  1. Shape your spec:"
+echo "     /shape-find-holes     ← find spec gaps"
+echo "     /shape-collapsed-options  ← find pre-made decisions"
+echo "     /shape-risk-sequence  ← sequence by risk"
+echo "     /shape-soul-check     ← check the animating idea"
 echo ""
-echo "  Shape Brief (handoff to CE or Superpowers):"
-echo "    /shape-brief"
+echo "  2. Brief and stage:"
+echo "     /shape-brief          ← synthesize findings, accept/reject"
+echo "                             inline changes, generate:"
+echo "                             → Stage_Manager_Brief.md"
+echo "                             → [Spec_Name]-Staged.md"
 echo ""
-echo "  Stage:"
-echo "    /stage-chunking  /stage-prompt-craft"
-echo "    /stage-live-mirror  /stage-decision-capture"
+echo "  3. Hand off to Superpowers:"
+echo "     Paste Stage_Manager_Brief.md (+ your chosen spec)"
+echo "     into your Superpowers session. Superpowers handles"
+echo "     planning and execution from there."
 echo ""
-echo "  Any Node:"
-echo "    /coherence-check"
-echo ""
-echo "  ── The Shape Brief Flow ──"
-echo "  Run shape skills → /shape-brief → Stage_Manager_Brief.md"
-echo "  + [Spec_Name]-Staged.md → CE or Superpowers"
-echo ""
-echo "  Want Stage Manager integrated with Compound Engineering?"
-echo "  Run: bash install-enhanced-ce.sh"
-echo ""
-echo "  Want Stage Manager integrated with Superpowers?"
-echo "  Run: bash install-superpowers.sh"
+echo "  Stage skills (during the build):"
+echo "     /stage-chunking       ← break work into CoD-sequenced chunks"
+echo "     /stage-prompt-craft   ← craft scoped prompts"
+echo "     /stage-live-mirror    ← surface what the tool invented"
+echo "     /stage-decision-capture ← full build manifest"
+echo "     /coherence-check      ← quick pulse check mid-build"
 echo ""
 echo -e "${CYAN}═══ Stage Manager · github.com/Mnfst-AI/Stage_Manager_Skills ═══${NC}"
 echo ""
