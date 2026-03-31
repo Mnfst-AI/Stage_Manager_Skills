@@ -2,20 +2,19 @@
   "name": "stage-manager",
   "version": "0.4.0",
   "description": "Artful Making skills for vibe coders. 11 skills across the Shape-to-Stage flow cycle — shape your spec, brief it, stage it clean. The mirror never goes dark.",
-  "author": "Manifest AI",
+  "author": {
+    "name": "Manifest AI",
+    "url": "https://github.com/Mnfst-AI"
+  },
+  "homepage": "https://github.com/Mnfst-AI/Stage_Manager_Skills",
+  "repository": "https://github.com/Mnfst-AI/Stage_Manager_Skills",
   "license": "MIT",
-  "skills": [
-    "skills/shape-find-holes",
-    "skills/shape-collapsed-options",
-    "skills/shape-risk-sequence",
-    "skills/shape-soul-check",
-    "skills/shape-brief",
-    "skills/shape-to-stage-gate",
-    "skills/stage-chunking",
-    "skills/stage-prompt-craft",
-    "skills/stage-live-mirror",
-    "skills/stage-decision-capture",
-    "skills/stage-prompt-guard",
-    "skills/coherence-check"
+  "keywords": [
+    "shaping",
+    "specification",
+    "vibe-coding",
+    "artful-making",
+    "flow-cycle",
+    "stage-manager"
   ]
 }
