@@ -11,10 +11,10 @@
 # then overlays the enhanced versions — giving you everything in one shot.
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/Mnfst-AI/Stage_Manager_Skills/enhanced-cli-skills/install-enhanced-ce.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/Mnfst-AI/Stage_Manager_Skills/main/install-enhanced-ce.sh | bash
 #
 # Or clone the repo and run locally:
-#   git clone -b enhanced-cli-skills https://github.com/Mnfst-AI/Stage_Manager_Skills.git
+#   git clone https://github.com/Mnfst-AI/Stage_Manager_Skills.git
 #   cd Stage_Manager_Skills
 #   bash install-enhanced-ce.sh
 #
@@ -50,7 +50,7 @@ elif [[ -f ".claude-plugin/plugin.json" ]]; then
 else
     info "Cloning Stage Manager repo..."
     TMPDIR_CLONE="$(mktemp -d)"
-    git clone -b enhanced-cli-skills --depth 1 https://github.com/Mnfst-AI/Stage_Manager_Skills.git "$TMPDIR_CLONE/Stage_Manager_Skills" 2>/dev/null
+    git clone --depth 1 https://github.com/Mnfst-AI/Stage_Manager_Skills.git "$TMPDIR_CLONE/Stage_Manager_Skills" 2>/dev/null
     REPO_DIR="$TMPDIR_CLONE/Stage_Manager_Skills"
     CLEANUP_CLONE=true
     ok "Cloned to temporary directory"
