@@ -1,5 +1,5 @@
 ---
-name: shape-brief
+name: sm:shape:brief
 description: Read the accumulated output from one or more shape skills (Find the Holes, Collapsed Options, Risk Sequence, Soul Check) and synthesize findings into a ranked top-three problem areas with suggested fixes — then generate inline change suggestions for the builder to accept or reject, produce a Stage_Manager_Brief.md handoff document, and write an updated spec as [original-filename]-Staged.md ready for /ce:brainstorm, /ce:work, /ce:plan, or Superpowers. Use when a builder has run one or more shape skills and wants to move forward without manually synthesizing the output themselves. Also use when a builder says "brief this," "synthesize the shape," "what are the top problems," or "I'm ready to hand off." Part of the Stage Manager Artful Making Skill Library by Manifest AI.
 ---
 
@@ -395,7 +395,7 @@ Absorbs Prompt Guard (inline change suggestions) and the transition function of 
 **The new flow:**
 ```
 Shape skills (any combo)
-    → /shape-brief
+    → /sm:shape:brief
         → Rank top three (cross-skill scoring)
         → Inline change suggestions (builder accepts/rejects)
         → Builder chooses handoff path:
@@ -410,6 +410,6 @@ Shape skills (any combo)
         → CE or Superpowers handles all builder interaction from here
 ```
 
-For a lightweight coherence check at any other transition point, use `/coherence-check` instead.
+For a lightweight coherence check at any other transition point, use `/sm:coherence-check` instead.
 
 → github.com/Mnfst-AI/Stage_Manager_Skills

@@ -1,5 +1,5 @@
 ---
-name: stage-prompt-craft
+name: sm:stage:prompt-craft
 description: Help a vibe coder turn a shaped story, chunk, or design decision into a prompt that a coding tool can execute cleanly — scoped, guardrailed, and pointed at one specific outcome. Use this skill when a builder is ready to hand work to Claude Code, Cursor, Replit, or another agentic coding tool and asks "how do I prompt this," "write me a prompt for this," "help me hand this off," or wants to make sure the AI builds what they mean, not what it assumes. Also use when a previous prompt produced the wrong result and the builder wants to understand why and try again. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
 ---
 

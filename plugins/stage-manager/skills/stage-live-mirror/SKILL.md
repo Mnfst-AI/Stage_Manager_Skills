@@ -1,5 +1,5 @@
 ---
-name: stage-live-mirror
+name: sm:stage:live-mirror
 description: Compare plan vs. code output after a coding session to surface every invisible decision the coding tool made. Use when a builder says "what did the tool change," "mirror this session," "what got invented," or after any ce:work task completion. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
 argument-hint: "[plan file path] [git diff or PR]"
 ---

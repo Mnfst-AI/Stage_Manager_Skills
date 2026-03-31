@@ -1,5 +1,5 @@
 ---
-name: coherence-check
+name: sm:coherence-check
 description: Stop and check whether the work in progress is still coherent — still pointing at the original intent, still serving the right user, still worth building in this form. Use this skill when a builder senses something is off but can't name it, feels like the work has drifted, wants to reset before continuing, asks "are we still on track," "does this still make sense," or "should we keep going." Also use at natural transition points — between chunks, after unexpected results from a coding tool, or whenever the plot feels lost mid-build. Can be run on any artifact: a prompt, a chunk, a PRD, a conversation, a set of cards. This is a lightweight gate — 2 minutes at any transition point. For the full shape/stage boundary synthesis with inline change suggestions and a staged spec, use Shape Brief instead. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
 ---
 

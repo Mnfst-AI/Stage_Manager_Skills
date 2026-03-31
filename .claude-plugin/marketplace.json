@@ -1,0 +1,31 @@
+{
+  "name": "stage-manager-skills",
+  "owner": {
+    "name": "Manifest AI",
+    "url": "https://github.com/Mnfst-AI"
+  },
+  "metadata": {
+    "description": "Artful Making skills for vibe coders — the Shape-to-Stage flow cycle",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "stage-manager",
+      "description": "11 skills across the Shape-to-Stage flow cycle. Shape your spec, brief it, stage it clean. The mirror never goes dark.",
+      "author": {
+        "name": "Manifest AI",
+        "url": "https://github.com/Mnfst-AI"
+      },
+      "homepage": "https://github.com/Mnfst-AI/Stage_Manager_Skills",
+      "tags": [
+        "shaping",
+        "specification",
+        "vibe-coding",
+        "artful-making",
+        "flow-cycle",
+        "stage-manager"
+      ],
+      "source": "./plugins/stage-manager"
+    }
+  ]
+}

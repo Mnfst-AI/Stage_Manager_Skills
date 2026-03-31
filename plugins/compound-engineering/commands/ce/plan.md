@@ -252,13 +252,13 @@ Use **AskUserQuestion tool**:
 **Question:** "Plan is ready. Want to break it into sequenced, prompt-ready chunks?"
 
 **Options:**
-1. **Chunk and sequence** — Run `/stage-chunking` + `/stage-wsjf` to break into flow-cycle-sized pieces ordered by cost of delay
-2. **Chunk, sequence, and craft prompts** — Also run `/stage-prompt-craft` to generate paste-ready prompts for each chunk
+1. **Chunk and sequence** — Run `/sm:stage:chunking` + `/sm:stage:wsjf` to break into flow-cycle-sized pieces ordered by cost of delay
+2. **Chunk, sequence, and craft prompts** — Also run `/sm:stage:prompt-craft` to generate paste-ready prompts for each chunk
 3. **Skip** — Keep the plan as-is for `/ce:work`
 
 **If chunking is run:**
 - Append the chunked stories and sequence to the plan under "## Implementation Sequence"
-- If prompts are crafted, run `/stage-prompt-guard` on each to flag prompt inventions before they reach the coding tool
+- If prompts are crafted, run `/sm:stage:prompt-guard` on each to flag prompt inventions before they reach the coding tool
 - Add prompt-guard annotations to the plan
 
 ### 7. Final Review & Submission
@@ -292,7 +292,7 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 1. **Open plan in editor** - Open the plan file for review
 2. **Run `/deepen-plan`** - Enhance with parallel research agents
 3. **Run Stage Manager shaping** - Surface invisible decisions (if not done yet)
-4. **Run `/stage-prompt-craft`** - Generate paste-ready prompts for each section
+4. **Run `/sm:stage:prompt-craft`** - Generate paste-ready prompts for each section
 5. **Review and refine** - Improve through structured self-review
 6. **Share to Proof** - Upload for collaborative review
 7. **Start `/ce:work`** - Begin implementing this plan locally

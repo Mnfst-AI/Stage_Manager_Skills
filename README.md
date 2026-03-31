@@ -79,7 +79,7 @@ Stage Manager and Superpowers are complementary: Stage Manager shapes your spec 
 
 ```
 Shape skills (any combo)
-    → /shape-brief
+    → /sm:shape:brief
         → Inline change suggestions (accept/reject)
             → Stage_Manager_Brief.md + [Spec_Name]-Staged.md
                 → CE (/ce:brainstorm, /ce:plan, /ce:work)
@@ -112,38 +112,38 @@ Stage Manager runs *before* Superpowers. The `Stage_Manager_Brief.md` and `[Spec
 
 | Skill | Slash Command | What It Does |
 |---|---|---|
-| **Find the Holes** | `/shape-find-holes` | Maps every place a coding tool will invent behavior you didn't ask for. P1/P2/P3 scoring. Interactive hole resolution. |
-| **Collapsed Options** | `/shape-collapsed-options` | Finds decisions you already made without knowing it. P1/P2/P3 scoring. |
-| **Risk Sequence** | `/shape-risk-sequence` | Surfaces load-bearing assumptions and sequences by cost-if-wrong. Shows what to prove first. |
-| **Soul Check** | `/shape-soul-check` | Deep 10-15 min read on whether the original animating idea is still alive. |
-| **Shape Brief** | `/shape-brief` | Synthesizes all shape skill output into ranked top-three problems, inline change suggestions, `Stage_Manager_Brief.md`, and `[Spec_Name]-Staged.md`. The handoff skill. |
+| **Find the Holes** | `/sm:shape:find-holes` | Maps every place a coding tool will invent behavior you didn't ask for. P1/P2/P3 scoring. Interactive hole resolution. |
+| **Collapsed Options** | `/sm:shape:collapsed-options` | Finds decisions you already made without knowing it. P1/P2/P3 scoring. |
+| **Risk Sequence** | `/sm:shape:risk-sequence` | Surfaces load-bearing assumptions and sequences by cost-if-wrong. Shows what to prove first. |
+| **Soul Check** | `/sm:shape:soul-check` | Deep 10-15 min read on whether the original animating idea is still alive. |
+| **Shape Brief** | `/sm:shape:brief` | Synthesizes all shape skill output into ranked top-three problems, inline change suggestions, `Stage_Manager_Brief.md`, and `[Spec_Name]-Staged.md`. The handoff skill. |
 
 ### Shape → Stage Transition
 
 | Skill | Slash Command | What It Does |
 |---|---|---|
-| **Shape-to-Stage Gate** | `/sense-shape-to-stage-gate` | Five readiness questions before staging begins. Verdicts: Ready, Almost, Not Yet. |
+| **Shape-to-Stage Gate** | `/sm:shape:gate` | Five readiness questions before staging begins. Verdicts: Ready, Almost, Not Yet. |
 
 ### Stage Node
 
 | Skill | Slash Command | What It Does |
 |---|---|---|
-| **Chunking** | `/stage-chunking` | Breaks work into flow-cycle-sized pieces sequenced by cost of delay — economic, risk, flow, and joy costs scored per chunk. |
-| **Prompt Craft** | `/stage-prompt-craft` | Turns a shaped chunk into a scoped, guardrailed prompt. |
-| **Live Mirror** | `/stage-live-mirror` | Compares plan vs. code output after a session. Surfaces every invisible decision the tool made. |
-| **Decision Capture** | `/stage-decision-capture` | Full decisions-made manifest after a build — every choice the tool made that wasn't in the spec. |
+| **Chunking** | `/sm:stage:chunking` | Breaks work into flow-cycle-sized pieces sequenced by cost of delay — economic, risk, flow, and joy costs scored per chunk. |
+| **Prompt Craft** | `/sm:stage:prompt-craft` | Turns a shaped chunk into a scoped, guardrailed prompt. |
+| **Live Mirror** | `/sm:stage:live-mirror` | Compares plan vs. code output after a session. Surfaces every invisible decision the tool made. |
+| **Decision Capture** | `/sm:stage:decision-capture` | Full decisions-made manifest after a build — every choice the tool made that wasn't in the spec. |
 
 ### All Nodes
 
 | Skill | Slash Command | What It Does |
 |---|---|---|
-| **Coherence Check** | `/coherence-check` | Lightweight 2-min gate at any transition point mid-build. For the shape/stage boundary, use Shape Brief instead. |
+| **Coherence Check** | `/sm:coherence-check` | Lightweight 2-min gate at any transition point mid-build. For the shape/stage boundary, use Shape Brief instead. |
 
 ---
 
 ## How to Read the Suite
 
-**The Shape Brief flow:** Run any combination of shape skills (Find the Holes → Collapsed Options → Risk Sequence → Soul Check), then run `/shape-brief`. It synthesizes the findings, presents inline change suggestions you accept or reject, and produces two handoff documents: `Stage_Manager_Brief.md` and `[Spec_Name]-Staged.md`.
+**The Shape Brief flow:** Run any combination of shape skills (Find the Holes → Collapsed Options → Risk Sequence → Soul Check), then run `/sm:shape:brief`. It synthesizes the findings, presents inline change suggestions you accept or reject, and produces two handoff documents: `Stage_Manager_Brief.md` and `[Spec_Name]-Staged.md`.
 
 **Three handoff paths from Shape Brief:**
 - **Brief only** — hand `Stage_Manager_Brief.md` to CE or Superpowers

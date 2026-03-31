@@ -5,27 +5,27 @@ A collection of 11 skills for vibe coders who use agentic coding tools (Claude C
 ## Available Slash Commands
 
 ### Shape (analyze before building)
-- `/shape-find-holes` — Find specification gaps where coding tools will invent behavior
-- `/shape-collapsed-options` — Find decisions made before the builder knew they were making them
-- `/shape-risk-sequence` — Surface load-bearing assumptions and sequence by cost-if-wrong
-- `/shape-soul-check` — Deep read on whether the original animating idea is still alive
-- `/shape-brief` — Synthesize shape skill output into ranked top-three problems, inline change suggestions, `Stage_Manager_Brief.md`, and `[Spec_Name]-Staged.md` — the handoff to CE or Superpowers
+- `/sm:shape:find-holes` — Find specification gaps where coding tools will invent behavior
+- `/sm:shape:collapsed-options` — Find decisions made before the builder knew they were making them
+- `/sm:shape:risk-sequence` — Surface load-bearing assumptions and sequence by cost-if-wrong
+- `/sm:shape:soul-check` — Deep read on whether the original animating idea is still alive
+- `/sm:shape:brief` — Synthesize shape skill output into ranked top-three problems, inline change suggestions, `Stage_Manager_Brief.md`, and `[Spec_Name]-Staged.md` — the handoff to CE or Superpowers
 
 ### Transition
-- `/sense-shape-to-stage-gate` — Five readiness questions before crossing from shaping to staging
+- `/sm:shape:gate` — Five readiness questions before crossing from shaping to staging
 
 ### Stage (before, during, and after the build)
-- `/stage-chunking` — Break work into flow-cycle-sized pieces sequenced by cost of delay (economic, risk, flow, joy)
-- `/stage-prompt-craft` — Turn shaped chunks into scoped, guardrailed prompts
-- `/stage-live-mirror` — Compare plan vs. code output per-session, surface what the tool invented
-- `/stage-decision-capture` — Full decisions-made manifest after a build, feeds forward into learning
+- `/sm:stage:chunking` — Break work into flow-cycle-sized pieces sequenced by cost of delay (economic, risk, flow, joy)
+- `/sm:stage:prompt-craft` — Turn shaped chunks into scoped, guardrailed prompts
+- `/sm:stage:live-mirror` — Compare plan vs. code output per-session, surface what the tool invented
+- `/sm:stage:decision-capture` — Full decisions-made manifest after a build, feeds forward into learning
 
 ### Any Node
-- `/coherence-check` — Lightweight 2-minute gate at any transition point mid-build. For the shape/stage boundary, use `/shape-brief` instead.
+- `/sm:coherence-check` — Lightweight 2-minute gate at any transition point mid-build. For the shape/stage boundary, use `/sm:shape:brief` instead.
 
 ## The Shape Brief Flow
 
-Run any shape skills, then run `/shape-brief` to synthesize. It will:
+Run any shape skills, then run `/sm:shape:brief` to synthesize. It will:
 
 1. Rank the top three problem areas across all skill output (scored by frequency + severity + proximity to core intent)
 2. Present inline change suggestions — you accept, reject, or modify each one
@@ -43,7 +43,7 @@ Modified CE commands that integrate Stage Manager at every phase live in `plugin
 
 ## Superpowers Integration
 
-Stage Manager shapes your spec before Superpowers executes it. Run shape skills, run `/shape-brief`, then hand the two output documents to Superpowers as the starting context. Superpowers handles all planning and execution interaction from there.
+Stage Manager shapes your spec before Superpowers executes it. Run shape skills, run `/sm:shape:brief`, then hand the two output documents to Superpowers as the starting context. Superpowers handles all planning and execution interaction from there.
 
 ## Shared References
 

@@ -1,5 +1,5 @@
 ---
-name: shape-soul-check
+name: sm:shape:soul-check
 description: Read a PRD, design doc, prompt, prototype, or work artifact and check whether the original animating idea is still alive in it. Use this skill when a builder feels like the work has drifted, asks "is this still the right thing," senses something is off but can't name it, has been iterating for a while and wants to reconnect to why they started, or wants to make sure the soul of the design hasn't been averaged down through rounds of feedback, scope changes, or technical constraints. Also use at the start of a new increment to reconnect with intent before building. This is a deep read — 10-15 minutes on a full artifact. For a quick 2-minute transition check, use Coherence Check instead. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
 ---
 

@@ -62,7 +62,7 @@ Additionally, always run these regardless of settings:
 
 **Always run alongside the review agents:**
 
-- Run `/stage-decision-capture` on the PR:
+- Run `/sm:stage:decision-capture` on the PR:
   - **Plan:** Look for the plan file referenced in the PR description or in `docs/plans/` matching the branch name
   - **Build:** The PR diff itself
 

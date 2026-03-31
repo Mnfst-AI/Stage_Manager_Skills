@@ -15,6 +15,7 @@
     "plugins/stage-manager/skills/stage-prompt-craft",
     "plugins/stage-manager/skills/stage-live-mirror",
     "plugins/stage-manager/skills/stage-decision-capture",
+    "plugins/stage-manager/skills/stage-prompt-guard",
     "plugins/stage-manager/skills/coherence-check"
   ]
 }
