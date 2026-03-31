@@ -27,7 +27,7 @@ Use this if you want the full stack — Stage Manager skills plus the CE pipelin
 **Works whether or not you already have Compound Engineering installed.**
 
 ```bash
-git clone -b enhanced-cli-skills https://github.com/Mnfst-AI/Stage_Manager_Skills.git
+git clone https://github.com/Mnfst-AI/Stage_Manager_Skills.git
 cd Stage_Manager_Skills
 bash install-enhanced-ce.sh
 ```
