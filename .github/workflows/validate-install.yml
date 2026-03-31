@@ -1,0 +1,174 @@
+name: Validate Install Integrity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── Job 1: Branch references ──────────────────────────────────────────────
+  check-branch-refs:
+    name: Check branch references
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify all branch references exist on remote
+        run: |
+          ERRORS=0
+
+          # Collect all 'git clone -b <branch>' references across .sh and .md files
+          while IFS= read -r match; do
+            file=$(echo "$match" | cut -d: -f1)
+            linenum=$(echo "$match" | cut -d: -f2)
+            branch=$(echo "$match" | sed -n 's/.*git clone -b \([^ ]*\).*/\1/p')
+            [ -z "$branch" ] && continue
+            if ! git ls-remote --heads origin "$branch" | grep -q .; then
+              echo "::error file=$file,line=$linenum::Branch '$branch' referenced but does not exist on remote"
+              ERRORS=$((ERRORS + 1))
+            else
+              echo "✓  $file:$linenum — branch '$branch' exists"
+            fi
+          done < <(grep -rn 'git clone -b' --include="*.sh" --include="*.md" . 2>/dev/null || true)
+
+          # Collect all raw.githubusercontent.com URLs with explicit branch segments
+          while IFS= read -r match; do
+            file=$(echo "$match" | cut -d: -f1)
+            linenum=$(echo "$match" | cut -d: -f2)
+            branch=$(echo "$match" | sed -n 's|.*Stage_Manager_Skills/\([^/]*\)/.*|\1|p')
+            [ -z "$branch" ] && continue
+            if ! git ls-remote --heads origin "$branch" | grep -q .; then
+              echo "::error file=$file,line=$linenum::Branch '$branch' in raw GitHub URL does not exist on remote"
+              ERRORS=$((ERRORS + 1))
+            else
+              echo "✓  $file:$linenum — raw URL branch '$branch' exists"
+            fi
+          done < <(grep -rn 'raw\.githubusercontent\.com/Mnfst-AI/Stage_Manager_Skills/' \
+                     --include="*.sh" --include="*.md" . 2>/dev/null || true)
+
+          if [ "$ERRORS" -gt 0 ]; then
+            echo ""
+            echo "❌ $ERRORS branch reference(s) point to non-existent remote branches"
+            exit 1
+          fi
+          echo ""
+          echo "✓  All branch references valid"
+
+  # ── Job 2: File path integrity ────────────────────────────────────────────
+  check-file-paths:
+    name: Check file paths
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate plugin.json
+        run: |
+          echo "── plugin.json ──"
+          python3 -m json.tool .claude-plugin/plugin.json > /dev/null && echo "✓  Valid JSON"
+
+          python3 - <<'PYEOF'
+          import json, sys, os
+
+          with open(".claude-plugin/plugin.json") as f:
+              data = json.load(f)
+
+          errors = 0
+          for path in data.get("skills", []):
+              if not os.path.isdir(path):
+                  print(f"::error file=.claude-plugin/plugin.json::Skill directory not found: {path}")
+                  errors += 1
+                  continue
+              skill_md = os.path.join(path, "SKILL.md")
+              if not os.path.isfile(skill_md):
+                  print(f"::error file=.claude-plugin/plugin.json::SKILL.md missing in: {path}")
+                  errors += 1
+              else:
+                  print(f"✓  {skill_md}")
+
+          sys.exit(errors)
+          PYEOF
+
+      - name: Check paths referenced in install scripts
+        run: |
+          ERRORS=0
+
+          check() {
+            local path="$1"
+            local context="$2"
+            if [ ! -e "$path" ]; then
+              echo "::error::Missing path: '$path'  (referenced in $context)"
+              ERRORS=$((ERRORS + 1))
+            else
+              echo "✓  $path  ($context)"
+            fi
+          }
+
+          echo "── Common to all installers ──"
+          check ".claude-plugin/plugin.json"        "all install scripts"
+          check "plugins/stage-manager/skills"      "all install scripts"
+          check "plugins/shared/references"         "all install scripts"
+
+          echo ""
+          echo "── Stage Manager skills (install.sh, install-enhanced-ce.sh, install-superpowers.sh) ──"
+          for skill in \
+            shape-find-holes \
+            shape-collapsed-options \
+            shape-risk-sequence \
+            shape-soul-check \
+            shape-brief \
+            shape-to-stage-gate \
+            stage-chunking \
+            stage-prompt-craft \
+            stage-live-mirror \
+            stage-decision-capture \
+            coherence-check; do
+            check "plugins/stage-manager/skills/$skill"          "install scripts"
+            check "plugins/stage-manager/skills/$skill/SKILL.md" "install scripts"
+          done
+
+          echo ""
+          echo "── Enhanced CE commands (install-enhanced-ce.sh) ──"
+          check "plugins/compound-engineering/commands/ce" "install-enhanced-ce.sh"
+          for f in brainstorm.md plan.md work.md review.md compound.md; do
+            check "plugins/compound-engineering/commands/ce/$f" "install-enhanced-ce.sh"
+          done
+
+          if [ "$ERRORS" -gt 0 ]; then
+            echo ""
+            echo "❌ $ERRORS path(s) referenced in install scripts do not exist in the repo"
+            exit 1
+          fi
+          echo ""
+          echo "✓  All referenced paths exist"
+
+  # ── Job 3: Install script dry-runs ────────────────────────────────────────
+  dry-run-installers:
+    name: Dry-run install scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Dry-run install.sh
+        run: |
+          FAKE_HOME=$(mktemp -d)
+          HOME="$FAKE_HOME" bash install.sh
+          echo ""
+          echo "✓  install.sh — no fatal errors"
+
+      - name: Dry-run install-enhanced-ce.sh
+        run: |
+          FAKE_HOME=$(mktemp -d)
+          HOME="$FAKE_HOME" bash install-enhanced-ce.sh
+          echo ""
+          echo "✓  install-enhanced-ce.sh — no fatal errors"
+
+      - name: Dry-run install-superpowers.sh
+        run: |
+          # Pipe "y" to handle the interactive Superpowers-not-found prompt
+          FAKE_HOME=$(mktemp -d)
+          echo "y" | HOME="$FAKE_HOME" bash install-superpowers.sh
+          echo ""
+          echo "✓  install-superpowers.sh — no fatal errors"
