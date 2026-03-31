@@ -1,5 +1,5 @@
 ---
-name: shape-collapsed-options
+name: sm:shape:collapsed-options
 description: Analyze a PRD, MRD, architecture doc, prompt, or prototype for places where the builder has already committed to a typical solution without knowing it — especially when they are trying to push the envelope on something. Use this skill when a vibe coder asks "am I thinking too small," "are there better approaches," "what are my options before I build this," "am I moving too fast," or wants to protect a breakthrough idea from being averaged down by safe, default choices. Also use when transitioning from prototype to production. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
 ---
 

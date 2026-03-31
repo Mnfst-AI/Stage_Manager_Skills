@@ -1,5 +1,5 @@
 ---
-name: sense-shape-to-stage-gate
+name: sm:shape:gate
 description: Run a five-question readiness check before a builder crosses from shaping into staging. Use this skill when a vibe coder says "I think I'm ready to start building," wants to hand work to a coding tool but hasn't explicitly checked readiness, is feeling the pull to just start, or has been shaping for a while and wants to know if they're done. Also use when a builder is about to write their first prompt for a new story or feature. This skill prevents the two failure modes at the shape/stage boundary — premature staging and over-shaping. It should run before Chunking begins. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
 ---
 

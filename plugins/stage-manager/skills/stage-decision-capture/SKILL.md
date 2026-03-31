@@ -1,5 +1,5 @@
 ---
-name: stage-decision-capture
+name: sm:stage:decision-capture
 description: Read the complete output of a build and generate a decisions-made manifest — every choice the coding tool made that was not explicitly specified. Use after completing a build, before ce:review, when a builder says "capture the decisions," "what was decided," or "generate the manifest." Part of the Stage Manager Artful Making Skill Library by Manifest AI.
 argument-hint: "[plan file path] [git diff or branch]"
 ---
@@ -188,9 +188,9 @@ decision_capture:
 
 ## Integration with CE Pipeline
 
-- **Before `ce:work`:** Run `/stage-prompt-guard` on the crafted prompts
-- **During `ce:work`:** Run `/stage-live-mirror` after each task completion
-- **After `ce:work`:** Run `/stage-decision-capture` on the full build
+- **Before `ce:work`:** Run `/sm:stage:prompt-guard` on the crafted prompts
+- **During `ce:work`:** Run `/sm:stage:live-mirror` after each task completion
+- **After `ce:work`:** Run `/sm:stage:decision-capture` on the full build
 - **Into `ce:review`:** Feed the manifest as context for the review agents
 - **Into `ce:compound`:** Feed the feed-forward data into the compound doc
 

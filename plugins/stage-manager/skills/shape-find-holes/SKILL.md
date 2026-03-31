@@ -1,5 +1,5 @@
 ---
-name: shape-find-holes
+name: sm:shape:find-holes
 description: Analyze a PRD, MRD, architecture doc, or prompt for specification gaps where coding tools will invent behavior on their own. Use this skill whenever a vibe coder or builder asks to "find the holes," "review my spec," "what will the AI fill in," "check my PRD," or wants to identify underspecified areas before handing work to Claude Code, Cursor, Replit, or any agentic coding tool. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
 ---
 

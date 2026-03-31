@@ -1,5 +1,5 @@
 ---
-name: stage-prompt-guard
+name: sm:stage:prompt-guard
 description: Review a crafted prompt before handing it to a coding tool — flag every place where the prompt itself is making invisible decisions the builder never made. Use when checking prompts from stage-prompt-craft, or when a builder says "guard this prompt," "check my prompt," or "what is this prompt deciding for me." Part of the Stage Manager Artful Making Skill Library by Manifest AI.
 argument-hint: "[prompt to review] [source spec or plan]"
 ---
@@ -25,7 +25,7 @@ Before analyzing, load `plugins/shared/references/invention-zones.md` and `plugi
 ## When to Use
 
 - Before handing a crafted prompt to a coding tool
-- After `/stage-prompt-craft` generates a prompt
+- After `/sm:stage:prompt-craft` generates a prompt
 - "Guard this prompt" or "check my prompt"
 - "What is this prompt deciding for me?"
 - Any time a builder wants to verify their prompt isn't over-specifying or under-specifying

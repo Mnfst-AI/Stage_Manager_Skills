@@ -113,7 +113,7 @@ This command takes a work document (plan, specification, or todo file) and execu
    3. **Turn off mirror checkpoints** — Don't ask again during this session
 
    **If Live Mirror is run:**
-   - Run `/stage-live-mirror` with the plan as spec and the current git diff as output
+   - Run `/sm:stage:live-mirror` with the plan as spec and the current git diff as output
    - Present findings
    - For any ⚠️ or 🔴 items, ask the builder: accept, modify, or revert
    - Update the plan's "Shaping Context" section with new decisions made
@@ -159,7 +159,7 @@ This command takes a work document (plan, specification, or todo file) and execu
 
 2. **Run Decision Capture (NEW)**
 
-   Before creating the PR, run `/stage-decision-capture` on the full build:
+   Before creating the PR, run `/sm:stage:decision-capture` on the full build:
 
    ```
    Plan: [plan file path]
