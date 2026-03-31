@@ -244,14 +244,14 @@ for skill in "${SKILL_DIRS[@]}"; do
 
     if [[ ! -d "$SOURCE" ]]; then
         warn "Skill source not found: $skill — skipping"
-        ((SKIPPED++))
+        ((SKIPPED++)) || true
         continue
     fi
 
     if [[ -L "$TARGET" ]]; then
         CURRENT_TARGET="$(readlink "$TARGET")"
         if [[ "$CURRENT_TARGET" == "$SOURCE" ]]; then
-            ((SKIPPED++))
+            ((SKIPPED++)) || true
             continue
         fi
         rm "$TARGET"
@@ -261,7 +261,7 @@ for skill in "${SKILL_DIRS[@]}"; do
     fi
 
     ln -s "$SOURCE" "$TARGET"
-    ((INSTALLED++))
+    ((INSTALLED++)) || true
 done
 
 ok "Skills: $INSTALLED installed, $SKIPPED already present"
@@ -291,14 +291,14 @@ ERRORS=0
 for f in "${CE_FILES[@]}"; do
     if ! grep -qi "stage.manager\|coherence\|soul.check\|find.the.holes\|shape.brief" "$CE_DIR/$f" 2>/dev/null; then
         warn "  $CE_DIR/$f may not have Stage Manager integration"
-        ((ERRORS++))
+        ((ERRORS++)) || true
     fi
 done
 
 for skill in "${SKILL_DIRS[@]}"; do
     if [[ ! -f "$SKILLS_DIR/$skill/SKILL.md" ]]; then
         warn "  Skill not accessible: $skill"
-        ((ERRORS++))
+        ((ERRORS++)) || true
     fi
 done
 
