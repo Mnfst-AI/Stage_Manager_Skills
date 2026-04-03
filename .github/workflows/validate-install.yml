@@ -64,11 +64,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate plugin.json
+      - name: Validate JSON files
         run: |
-          echo "── plugin.json ──"
-          python3 -m json.tool .claude-plugin/plugin.json > /dev/null && echo "✓  Valid JSON"
-          python3 -m json.tool plugins/stage-manager/.claude-plugin/plugin.json > /dev/null && echo "✓  Valid JSON (stage-manager)"
+          echo "── JSON validation ──"
+          python3 -m json.tool .claude-plugin/plugin.json > /dev/null && echo "✓  Valid JSON — .claude-plugin/plugin.json"
+          python3 -m json.tool .claude-plugin/marketplace.json > /dev/null && echo "✓  Valid JSON — .claude-plugin/marketplace.json"
+          python3 -m json.tool plugins/stage-manager/.claude-plugin/plugin.json > /dev/null && echo "✓  Valid JSON — plugins/stage-manager/.claude-plugin/plugin.json"
 
       - name: Check skill count and presence across all files
         run: |
@@ -170,14 +171,95 @@ jobs:
           fi
           echo ""
 
-          # ── Check plugin.json skill count claim ──
-          echo "── plugin.json ──"
+          # ── Check nested plugin.json skill count claim ──
+          echo "── plugins/stage-manager/.claude-plugin/plugin.json ──"
           PLUGIN_COUNT=$(grep -oP '\b\d+\b(?= skills)' plugins/stage-manager/.claude-plugin/plugin.json | head -1 || true)
           if [ -n "$PLUGIN_COUNT" ] && [ "$PLUGIN_COUNT" != "$DISK_COUNT" ]; then
-            echo "::error::plugin.json claims $PLUGIN_COUNT skills but $DISK_COUNT exist on disk"
+            echo "::error::plugins/stage-manager plugin.json claims $PLUGIN_COUNT skills but $DISK_COUNT exist on disk"
             ERRORS=$((ERRORS + 1))
           elif [ -n "$PLUGIN_COUNT" ]; then
-            echo "✓  plugin.json count ($PLUGIN_COUNT) matches disk"
+            echo "✓  nested plugin.json count ($PLUGIN_COUNT) matches disk"
+          fi
+          echo ""
+
+          # ── Check root plugin.json skill count claim ──
+          echo "── .claude-plugin/plugin.json ──"
+          ROOT_PLUGIN_COUNT=$(grep -oP '\b\d+\b(?= skills)' .claude-plugin/plugin.json | head -1 || true)
+          if [ -n "$ROOT_PLUGIN_COUNT" ] && [ "$ROOT_PLUGIN_COUNT" != "$DISK_COUNT" ]; then
+            echo "::error::root plugin.json claims $ROOT_PLUGIN_COUNT skills but $DISK_COUNT exist on disk"
+            ERRORS=$((ERRORS + 1))
+          elif [ -n "$ROOT_PLUGIN_COUNT" ]; then
+            echo "✓  root plugin.json count ($ROOT_PLUGIN_COUNT) matches disk"
+          fi
+
+          # Check root plugin.json skills array matches disk
+          if python3 -c "import json,sys; d=json.load(open('.claude-plugin/plugin.json')); sys.exit(0 if 'skills' in d else 1)" 2>/dev/null; then
+            PLUGIN_SKILLS=$(python3 -c "
+          import json
+          d = json.load(open('.claude-plugin/plugin.json'))
+          for s in sorted(d.get('skills', [])):
+              print(s.split('/')[-1])
+          ")
+            MISSING_FROM_PLUGIN=$(comm -23 <(echo "$SKILLS_ON_DISK") <(echo "$PLUGIN_SKILLS"))
+            EXTRA_IN_PLUGIN=$(comm -13 <(echo "$SKILLS_ON_DISK") <(echo "$PLUGIN_SKILLS"))
+
+            if [ -n "$MISSING_FROM_PLUGIN" ]; then
+              echo "::error::Skills on disk but missing from root plugin.json skills array:"
+              echo "$MISSING_FROM_PLUGIN" | while read -r s; do echo "  - $s"; done
+              ERRORS=$((ERRORS + 1))
+            fi
+            if [ -n "$EXTRA_IN_PLUGIN" ]; then
+              echo "::error::Skills in root plugin.json skills array but not on disk:"
+              echo "$EXTRA_IN_PLUGIN" | while read -r s; do echo "  - $s"; done
+              ERRORS=$((ERRORS + 1))
+            fi
+            if [ -z "$MISSING_FROM_PLUGIN" ] && [ -z "$EXTRA_IN_PLUGIN" ]; then
+              echo "✓  root plugin.json skills array matches disk ($DISK_COUNT skills)"
+            fi
+          fi
+          echo ""
+
+          # ── Check marketplace.json skill count claim ──
+          echo "── .claude-plugin/marketplace.json ──"
+          MKT_COUNT=$(python3 -c "
+          import json, re
+          d = json.load(open('.claude-plugin/marketplace.json'))
+          desc = d.get('plugins', [{}])[0].get('description', '')
+          m = re.search(r'\b(\d+)\b(?=.*[Ss]kills)', desc)
+          print(m.group(1) if m else '')
+          ")
+          if [ -n "$MKT_COUNT" ] && [ "$MKT_COUNT" != "$DISK_COUNT" ]; then
+            echo "::error::marketplace.json claims $MKT_COUNT skills but $DISK_COUNT exist on disk"
+            ERRORS=$((ERRORS + 1))
+          elif [ -n "$MKT_COUNT" ]; then
+            echo "✓  marketplace.json count ($MKT_COUNT) matches disk"
+          fi
+
+          # Check version consistency across all manifests
+          ROOT_VER=$(python3 -c "import json; print(json.load(open('.claude-plugin/plugin.json')).get('version',''))")
+          NESTED_VER=$(python3 -c "import json; print(json.load(open('plugins/stage-manager/.claude-plugin/plugin.json')).get('version',''))")
+          MKT_VER=$(python3 -c "import json; print(json.load(open('.claude-plugin/marketplace.json')).get('metadata',{}).get('version',''))")
+          MKT_PLUGIN_VER=$(python3 -c "import json; print(json.load(open('.claude-plugin/marketplace.json'))['plugins'][0].get('version',''))")
+
+          echo ""
+          echo "── Version consistency ──"
+          VERSION_MISMATCH=0
+          if [ -n "$ROOT_VER" ] && [ -n "$NESTED_VER" ] && [ "$ROOT_VER" != "$NESTED_VER" ]; then
+            echo "::error::Version mismatch: root plugin.json=$ROOT_VER vs nested plugin.json=$NESTED_VER"
+            VERSION_MISMATCH=1
+          fi
+          if [ -n "$ROOT_VER" ] && [ -n "$MKT_VER" ] && [ "$ROOT_VER" != "$MKT_VER" ]; then
+            echo "::error::Version mismatch: root plugin.json=$ROOT_VER vs marketplace.json metadata=$MKT_VER"
+            VERSION_MISMATCH=1
+          fi
+          if [ -n "$ROOT_VER" ] && [ -n "$MKT_PLUGIN_VER" ] && [ "$ROOT_VER" != "$MKT_PLUGIN_VER" ]; then
+            echo "::error::Version mismatch: root plugin.json=$ROOT_VER vs marketplace.json plugin entry=$MKT_PLUGIN_VER"
+            VERSION_MISMATCH=1
+          fi
+          if [ "$VERSION_MISMATCH" -eq 1 ]; then
+            ERRORS=$((ERRORS + 1))
+          else
+            echo "✓  All manifests at version $ROOT_VER"
           fi
           echo ""
 

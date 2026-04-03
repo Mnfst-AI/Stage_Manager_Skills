@@ -5,27 +5,41 @@
     "url": "https://github.com/Mnfst-AI"
   },
   "metadata": {
-    "description": "Artful Making skills for vibe coders — the Shape-to-Stage flow cycle",
-    "version": "1.0.0"
+    "description": "Artful Making skills for vibe coders — shape, validate, brief, stage. 16 skills across the full flow cycle.",
+    "version": "0.5.0"
   },
   "plugins": [
     {
       "name": "stage-manager",
-      "description": "11 skills across the Shape-to-Stage flow cycle. Shape your spec, brief it, stage it clean. The mirror never goes dark.",
+      "source": ".",
+      "description": "16 Artful Making skills for vibe coders across the Shape-to-Stage flow cycle. Shape skills analyze specs for gaps, collapsed options, risks, and soul drift. Validate skills prove the premise before a line of code. Stage skills chunk work, craft prompts, mirror sessions, and capture decisions. The mirror never goes dark.",
+      "version": "0.5.0",
       "author": {
         "name": "Manifest AI",
         "url": "https://github.com/Mnfst-AI"
       },
       "homepage": "https://github.com/Mnfst-AI/Stage_Manager_Skills",
+      "repository": "https://github.com/Mnfst-AI/Stage_Manager_Skills",
+      "license": "MIT",
+      "keywords": [
+        "vibe-coding",
+        "artful-making",
+        "spec-review",
+        "prompt-craft",
+        "flow-cycle",
+        "premise-validation",
+        "agentic-coding"
+      ],
+      "category": "productivity",
       "tags": [
         "shaping",
         "specification",
         "vibe-coding",
         "artful-making",
         "flow-cycle",
-        "stage-manager"
-      ],
-      "source": "./plugins/stage-manager"
+        "stage-manager",
+        "premise-validation"
+      ]
     }
   ]
 }
