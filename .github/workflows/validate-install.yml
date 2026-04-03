@@ -134,10 +134,13 @@ jobs:
           echo ""
 
           # ── Check CLAUDE.md mentions every skill ──
+          # CLAUDE.md uses slash command names (/sm:shape:find-holes) not directory names (shape-find-holes)
+          # Convert directory names: shape-X → shape:X, stage-X → stage:X, plain → plain
           echo "── CLAUDE.md ──"
           CLAUDE_MISSING=""
           while read -r skill; do
-            if ! grep -q "$skill" CLAUDE.md; then
+            # Convert directory name to a grep pattern that matches either format
+            if ! grep -q "$skill" CLAUDE.md && ! grep -q "$(echo "$skill" | sed 's/-/:/; s/-/:/g')" CLAUDE.md; then
               CLAUDE_MISSING="$CLAUDE_MISSING $skill"
             fi
           done <<< "$SKILLS_ON_DISK"
@@ -199,10 +202,11 @@ jobs:
           HOME="$FAKE_HOME" bash install.sh > /dev/null 2>&1
 
           DISK_COUNT=$(find plugins/stage-manager/skills -name SKILL.md -maxdepth 2 | wc -l | tr -d ' ')
-          INSTALLED_COUNT=$(find "$FAKE_HOME/.claude/skills" -name SKILL.md | wc -l | tr -d ' ')
+          # Count symlinked skill directories (install.sh creates symlinks, not copies)
+          INSTALLED_COUNT=$(find "$FAKE_HOME/.claude/skills" -maxdepth 1 -type l | wc -l | tr -d ' ')
 
           if [ "$INSTALLED_COUNT" != "$DISK_COUNT" ]; then
-            echo "::error::install.sh installed $INSTALLED_COUNT skills but $DISK_COUNT exist in repo"
+            echo "::error::install.sh created $INSTALLED_COUNT symlinks but $DISK_COUNT skills exist in repo"
             exit 1
           fi
-          echo "✓  install.sh installed all $INSTALLED_COUNT skills"
+          echo "✓  install.sh linked all $INSTALLED_COUNT skills"
