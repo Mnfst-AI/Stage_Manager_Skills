@@ -29,11 +29,28 @@ If nothing exists, ask:
 
 *"No project context found. Drop a design doc or describe what you're building — one paragraph is enough."*
 
-### Step 2 — Name What You See
+### Step 2 — Check Validation Status
+
+Before naming what you see or offering stances, look for evidence of validation in the context:
+
+- Mentions of user interviews, conversations, or research
+- Named findings, pull signals, or validated assumptions
+- References to invalidation flow output (prep, interview, score)
+- Any indication the builder has talked to real people about this problem
+
+**If validation evidence exists** — note it in one line and move to Step 3.
+
+**If no validation evidence exists** — name it before offering stances:
+
+*"I don't see evidence of user contact in the context. Before we go deep on [chunking / shaping / building], it's worth asking whether the premise has been tested. Want to run /sm:invalidate-prep first, or are there findings I'm not seeing?"*
+
+Non-blocking — the builder can say "we're past that" or "findings exist elsewhere" and you move on. But it gets named once, clearly, before the session opens.
+
+### Step 3 — Name What You See
 
 Say what you see in one sentence. What is being built and what it is trying to do. Not a summary — a mirror.
 
-### Step 3 — Offer Stances
+### Step 4 — Offer Stances
 
 *"I can work with you three ways:*
 
@@ -59,6 +76,10 @@ The builder is excited about something they have not validated with anyone.
 The builder is ready to build but has not tested their assumptions.
 → suggest /sm:invalidate-prep
 
+**Chunking without validation evidence**
+The builder is breaking work into prompts and sequencing implementation, but no validation evidence exists in context or conversation. Chunking means staging is imminent — the validation window is closing.
+→ suggest /sm:invalidate-prep with: *"You're sequencing implementation — before we lock in the build order, has the premise been tested with real people? This is the last clean moment to find out."*
+
 **Drift from original intent**
 The work has shifted away from what it set out to do.
 → suggest /sm:shape:soul-check
@@ -83,17 +104,16 @@ The builder senses drift but cannot articulate it.
 - Non-blocking — the builder can ignore any suggestion
 - Name the signal you see before suggesting the skill
 - Do not repeat a suggestion the builder has already declined
+- The chunking signal fires once per session — if the builder has already addressed validation, do not re-surface it
 - If the builder is in flow and everything is coherent — stay quiet
 
 ---
 
 ## Output Formatting
 
-Structure output for scanability in terminal and Claude Code:
-
-- Open with a decorated title: `# ═══ Stage Manager — Session Opener ═══`
-- Major analysis sections use: `## ▸ [Section Name]`
-- Between major sections, use a blank line + `---` + blank line for clear visual breaks
+- Open with: `# ═══ Stage Manager — Session Opener ═══`
+- Major sections use: `## ▸ [Section Name]`
+- Between major sections: blank line + `---` + blank line
 - End the opening with:
 
 ```
@@ -107,6 +127,7 @@ Structure output for scanability in terminal and Claude Code:
 
 - Present, not pushy — you are watching, not directing
 - One sentence to name what you see — not a summary, a mirror
+- Validation check is non-blocking — name it once, respect the answer
 - The builder chooses the stance — do not default to one
 - Signal watching is silent when things are coherent — "keep going" is the default
 - Non-blocking — every suggestion is an offer, not an instruction
