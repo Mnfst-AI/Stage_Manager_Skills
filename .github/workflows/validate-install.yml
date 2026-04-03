@@ -135,12 +135,19 @@ jobs:
 
           # ── Check CLAUDE.md mentions every skill ──
           # CLAUDE.md uses slash command names (/sm:shape:find-holes) not directory names (shape-find-holes)
-          # Convert directory names: shape-X → shape:X, stage-X → stage:X, plain → plain
+          # Directory "shape-find-holes" → grep for "shape:find-holes" or "shape-find-holes"
+          # Directory "stage-chunking" → grep for "stage:chunking" or "stage-chunking"
+          # Directory "shape-to-stage-gate" → grep for "shape:gate" or "shape-to-stage-gate"
           echo "── CLAUDE.md ──"
           CLAUDE_MISSING=""
           while read -r skill; do
-            # Convert directory name to a grep pattern that matches either format
-            if ! grep -q "$skill" CLAUDE.md && ! grep -q "$(echo "$skill" | sed 's/-/:/; s/-/:/g')" CLAUDE.md; then
+            # Convert: replace first hyphen after shape/stage prefix with colon
+            slash_name=$(echo "$skill" | sed 's/^\(shape\)-/\1:/; s/^\(stage\)-/\1:/')
+            # Also check the SKILL.md frontmatter name field for aliases (e.g. shape-to-stage-gate → sm:shape:gate)
+            skill_md_name=$(grep -m1 '^name:' "plugins/stage-manager/skills/$skill/SKILL.md" 2>/dev/null \
+              | sed 's/^name: *//; s/^sm://' || true)
+            if ! grep -q "$skill" CLAUDE.md && ! grep -q "$slash_name" CLAUDE.md \
+               && { [ -z "$skill_md_name" ] || ! grep -q "$skill_md_name" CLAUDE.md; }; then
               CLAUDE_MISSING="$CLAUDE_MISSING $skill"
             fi
           done <<< "$SKILLS_ON_DISK"
