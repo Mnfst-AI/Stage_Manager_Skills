@@ -112,7 +112,7 @@ jobs:
           check "plugins/shared/references"         "all install scripts"
 
           echo ""
-          echo "── Stage Manager skills (install.sh, install-enhanced-ce.sh, install-superpowers.sh) ──"
+          echo "── Stage Manager skills (install.sh) ──"
           for skill in \
             shape-find-holes \
             shape-collapsed-options \
@@ -124,16 +124,14 @@ jobs:
             stage-prompt-craft \
             stage-live-mirror \
             stage-decision-capture \
-            coherence-check; do
+            coherence-check \
+            yagni \
+            invalidate-prep \
+            invalidate-interview \
+            invalidate-score \
+            stage-manage; do
             check "plugins/stage-manager/skills/$skill"          "install scripts"
             check "plugins/stage-manager/skills/$skill/SKILL.md" "install scripts"
-          done
-
-          echo ""
-          echo "── Enhanced CE commands (install-enhanced-ce.sh) ──"
-          check "plugins/compound-engineering/commands/ce" "install-enhanced-ce.sh"
-          for f in brainstorm.md plan.md work.md review.md compound.md; do
-            check "plugins/compound-engineering/commands/ce/$f" "install-enhanced-ce.sh"
           done
 
           if [ "$ERRORS" -gt 0 ]; then
@@ -158,26 +156,15 @@ jobs:
           echo ""
           echo "✓  install.sh — no fatal errors"
 
-      - name: Dry-run install-enhanced-ce.sh
+      - name: Verify removed installers are gone
         run: |
-          FAKE_HOME=$(mktemp -d)
-          # Pre-seed stock CE commands so the installer doesn't clone the external repo
-          CE_DIR="$FAKE_HOME/.claude/commands/ce"
-          mkdir -p "$CE_DIR"
-          for f in brainstorm.md compound.md plan.md review.md work.md; do
-            echo "# Stub for CI dry-run" > "$CE_DIR/$f"
+          ERRORS=0
+          for f in install-enhanced-ce.sh install-superpowers.sh; do
+            if [ -f "$f" ]; then
+              echo "::error::Removed installer still exists: $f"
+              ERRORS=$((ERRORS + 1))
+            else
+              echo "✓  $f correctly removed"
+            fi
           done
-          HOME="$FAKE_HOME" bash install-enhanced-ce.sh
-          echo ""
-          echo "✓  install-enhanced-ce.sh — no fatal errors"
-
-      - name: Dry-run install-superpowers.sh
-        run: |
-          FAKE_HOME=$(mktemp -d)
-          # Pre-seed a Superpowers CLAUDE.md so the installer doesn't prompt
-          SP_DIR="$FAKE_HOME/.claude"
-          mkdir -p "$SP_DIR"
-          echo "# Stub" > "$SP_DIR/CLAUDE.md"
-          echo "y" | HOME="$FAKE_HOME" bash install-superpowers.sh
-          echo ""
-          echo "✓  install-superpowers.sh — no fatal errors"
+          [ "$ERRORS" -eq 0 ] || exit 1
