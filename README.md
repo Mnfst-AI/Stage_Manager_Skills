@@ -146,10 +146,10 @@ stage-manager-soul.md     ← the animating philosophy
 
 ---
 
-## Made by Manifest AI
+## Made by MNFST Ai
 
 These skills are free and open. They are the first taste of deliberate unfolding — available to any builder, right now.
 
 Shape first. Stage second. Stay the author.
 
-> [manifest.ai](https://manifest.ai) · [Stage Manager Skills](https://github.com/Mnfst-AI/Stage_Manager_Skills)
+> [MNFST.AI](https://manifest.ai) · [Stage Manager Skills](https://github.com/Mnfst-AI/Stage_Manager_Skills)
