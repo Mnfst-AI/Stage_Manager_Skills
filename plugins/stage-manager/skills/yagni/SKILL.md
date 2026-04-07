@@ -1,6 +1,6 @@
 ---
 name: sm:yagni
-description: Challenge the premise before a single line of code. Fires when a builder moves toward staging without naming what they validated first — no user contact, no findings, no hungry users identified. Use this skill when a builder says "let's build X" with no prior mention of who they talked to or what they found, when the orchestrator detects a new idea with no prior user contact, or when a builder wants to skip straight to coding without validating the premise. This is the gate between conviction and evidence. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
+description: Challenge the premise before a single line of code. Fires when a builder moves toward staging without naming what they validated first — no user contact, no findings, no hungry users identified. Use this skill when a builder says "let's build X" with no prior mention of who they talked to or what they found, when the orchestrator detects a new idea with no prior user contact, or when a builder wants to skip straight to coding without validating the premise. This is the gate between conviction and evidence. Part of the Stage Manager Artful Making Skill Library by MNFST Ai.
 ---
 
 # Stage Manager — YAGNI

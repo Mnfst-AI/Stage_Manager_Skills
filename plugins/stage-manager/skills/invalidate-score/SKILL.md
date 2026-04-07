@@ -1,6 +1,6 @@
 ---
 name: sm:invalidate-score
-description: Process what a builder heard in invalidation interviews. Score each assumption as validated, invalidated, or still open. Surface the pull signal if it appeared — lean-in, reach, referral, emotion, behavior, or time. Use this skill after running invalidation interviews, when a builder comes back from a conversation and says "here's what I heard," "did I find pull," or wants to know whether their assumptions survived contact with reality. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
+description: Process what a builder heard in invalidation interviews. Score each assumption as validated, invalidated, or still open. Surface the pull signal if it appeared — lean-in, reach, referral, emotion, behavior, or time. Use this skill after running invalidation interviews, when a builder comes back from a conversation and says "here's what I heard," "did I find pull," or wants to know whether their assumptions survived contact with reality. Part of the Stage Manager Artful Making Skill Library by MNFST Ai.
 ---
 
 # Stage Manager — Invalidation Score

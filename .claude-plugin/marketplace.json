@@ -1,7 +1,7 @@
 {
   "name": "stage-manager-skills",
   "owner": {
-    "name": "Manifest AI",
+    "name": "MNFST Ai",
     "url": "https://github.com/Mnfst-AI"
   },
   "metadata": {
@@ -15,7 +15,7 @@
       "description": "16 Artful Making skills for vibe coders across the Shape-to-Stage flow cycle. Shape skills analyze specs for gaps, collapsed options, risks, and soul drift. Validate skills prove the premise before a line of code. Stage skills chunk work, craft prompts, mirror sessions, and capture decisions. The mirror never goes dark.",
       "version": "0.5.0",
       "author": {
-        "name": "Manifest AI",
+        "name": "MNFST Ai",
         "url": "https://github.com/Mnfst-AI"
       },
       "homepage": "https://github.com/Mnfst-AI/Stage_Manager_Skills",

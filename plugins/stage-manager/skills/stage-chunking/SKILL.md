@@ -1,6 +1,6 @@
 ---
 name: sm:stage:chunking
-description: Break a story, feature, or design doc into flow-cycle-sized pieces that a coding tool can execute cleanly — sequenced by cost of delay. Use this skill when a vibe coder is ready to build and wants to hand work to Claude Code, Cursor, Replit, or another agentic coding tool, asks "how do I break this down," has a story or feature that feels too big to prompt in one go, wants to maintain agency and review points during a build, or needs to sequence implementation work without losing track of the plot. Also use when a builder asks "what should I build first," "what has the most impact," or wants to sequence competing chunks by economic, risk, flow, and joy cost. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
+description: Break a story, feature, or design doc into flow-cycle-sized pieces that a coding tool can execute cleanly — sequenced by cost of delay. Use this skill when a vibe coder is ready to build and wants to hand work to Claude Code, Cursor, Replit, or another agentic coding tool, asks "how do I break this down," has a story or feature that feels too big to prompt in one go, wants to maintain agency and review points during a build, or needs to sequence implementation work without losing track of the plot. Also use when a builder asks "what should I build first," "what has the most impact," or wants to sequence competing chunks by economic, risk, flow, and joy cost. Part of the Stage Manager Artful Making Skill Library by MNFST Ai.
 ---
 
 # Stage Manager — Chunking

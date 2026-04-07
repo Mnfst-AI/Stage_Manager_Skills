@@ -1,6 +1,6 @@
 ---
 name: sm:stage-manage
-description: Start a Stage Manager session. Read project context, orient to what the builder is working on, and offer to watch alongside them — suggesting skills as signals emerge. Use this skill to begin a working session, when a builder says "let's start," "stage manage this," or wants a thinking partner while they build. This is the orchestration skill — it watches for signals and surfaces the right skill at the right moment. Not brainstorming. Staging work from a larger sense, not a prompt sense. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
+description: Start a Stage Manager session. Read project context, orient to what the builder is working on, and offer to watch alongside them — suggesting skills as signals emerge. Use this skill to begin a working session, when a builder says "let's start," "stage manage this," or wants a thinking partner while they build. This is the orchestration skill — it watches for signals and surfaces the right skill at the right moment. Not brainstorming. Staging work from a larger sense, not a prompt sense. Part of the Stage Manager Artful Making Skill Library by MNFST Ai.
 ---
 
 # Stage Manager — Session Opener

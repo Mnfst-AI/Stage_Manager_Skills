@@ -1,6 +1,6 @@
 ---
 name: sm:shape:risk-sequence
-description: Analyze a PRD, MRD, architecture doc, design doc, or prompt for the load-bearing assumptions — the things that, if wrong, make everything downstream irrelevant. Use this skill when a vibe coder wants to know what to build first, asks "what could go wrong," wants to sequence work to surface the riskiest assumptions early, is worried about building the wrong thing, or wants to apply lean startup or Jobs to Be Done thinking before committing to a full build. Also use before writing prompts for Claude Code, Cursor, or Replit to ensure the highest-risk work gets proven before the lower-risk work gets built. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
+description: Analyze a PRD, MRD, architecture doc, design doc, or prompt for the load-bearing assumptions — the things that, if wrong, make everything downstream irrelevant. Use this skill when a vibe coder wants to know what to build first, asks "what could go wrong," wants to sequence work to surface the riskiest assumptions early, is worried about building the wrong thing, or wants to apply lean startup or Jobs to Be Done thinking before committing to a full build. Also use before writing prompts for Claude Code, Cursor, or Replit to ensure the highest-risk work gets proven before the lower-risk work gets built. Part of the Stage Manager Artful Making Skill Library by MNFST Ai.
 ---
 
 # Stage Manager — Risk Sequence

@@ -122,5 +122,5 @@ Then come to Stage Manager for the full practice.  http://stage-manager.ai
 
 ---
 
-*Made with care by Manifest AI*
+*Made with care by MNFST Ai*
 *For the builders who want to lead.*

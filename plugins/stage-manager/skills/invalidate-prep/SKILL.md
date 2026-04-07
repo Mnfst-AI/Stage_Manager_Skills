@@ -1,6 +1,6 @@
 ---
 name: sm:invalidate-prep
-description: Help a builder surface and rank their assumptions, identify who holds the answer, and generate problem statements for invalidation interviews. Use this skill when a builder has an idea but hasn't talked to anyone yet, wants to figure out what to test first, says "I think users want," or needs to prepare before running invalidation interviews. This is the entry point to the invalidation flow — excavate assumptions, rank by cost-if-wrong, name personas, and generate problem statements. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
+description: Help a builder surface and rank their assumptions, identify who holds the answer, and generate problem statements for invalidation interviews. Use this skill when a builder has an idea but hasn't talked to anyone yet, wants to figure out what to test first, says "I think users want," or needs to prepare before running invalidation interviews. This is the entry point to the invalidation flow — excavate assumptions, rank by cost-if-wrong, name personas, and generate problem statements. Part of the Stage Manager Artful Making Skill Library by MNFST Ai.
 ---
 
 # Stage Manager — Invalidation Prep

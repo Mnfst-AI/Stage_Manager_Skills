@@ -1,6 +1,6 @@
 ---
 name: sm:invalidate-interview
-description: Generate a live interview script that a human runs with a real person — not a survey, not a sales call. A structured conversation designed to kill assumptions using negative framing to provoke correction. Use this skill after running invalidate-prep, when a builder is ready to talk to real people, wants an interview script for assumption testing, or says "how do I test this." The script uses negative framing — state the assumption wrong so the interviewee corrects you. The lean-in moment is the signal that matters most. Part of the Stage Manager Artful Making Skill Library by Manifest AI.
+description: Generate a live interview script that a human runs with a real person — not a survey, not a sales call. A structured conversation designed to kill assumptions using negative framing to provoke correction. Use this skill after running invalidate-prep, when a builder is ready to talk to real people, wants an interview script for assumption testing, or says "how do I test this." The script uses negative framing — state the assumption wrong so the interviewee corrects you. The lean-in moment is the signal that matters most. Part of the Stage Manager Artful Making Skill Library by MNFST Ai.
 ---
 
 # Stage Manager — Invalidation Interview

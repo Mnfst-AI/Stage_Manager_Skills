@@ -1,6 +1,6 @@
 ---
 name: sm:stage:decision-capture
-description: Read the complete output of a build and generate a decisions-made manifest — every choice the coding tool made that was not explicitly specified. Use after completing a build, before ce:review, when a builder says "capture the decisions," "what was decided," or "generate the manifest." Part of the Stage Manager Artful Making Skill Library by Manifest AI.
+description: Read the complete output of a build and generate a decisions-made manifest — every choice the coding tool made that was not explicitly specified. Use after completing a build, before ce:review, when a builder says "capture the decisions," "what was decided," or "generate the manifest." Part of the Stage Manager Artful Making Skill Library by MNFST Ai.
 argument-hint: "[plan file path] [git diff or branch]"
 ---
 
