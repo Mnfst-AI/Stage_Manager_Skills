@@ -10,13 +10,27 @@ These skills help you validate before building, expand options before converging
 
 ## Install
 
+### Option 1: Claude Code Plugin (recommended)
+
+```bash
+claude plugin add --transport=github Mnfst-AI/Stage_Manager_Skills
+```
+
+That's it. All 16 skills appear as `/slash-commands` immediately.
+
+### Option 2: Manual Install
+
 ```bash
 git clone https://github.com/Mnfst-AI/Stage_Manager_Skills.git
 cd Stage_Manager_Skills
 bash install.sh
 ```
 
-All 16 skills appear as `/slash-commands` in Claude Code. Start a session with `/sm:stage-manage`.
+The install script symlinks each skill into `~/.claude/skills/` so they're available globally.
+
+---
+
+Start a session with `/sm:stage-manage`.
 
 ---
 
@@ -104,7 +118,8 @@ Shape skills (any combo) → /sm:shape:brief → Stage_Manager_Brief.md
 ## Repository Structure
 
 ```
-install.sh                                     ← installer
+.claude-plugin/plugin.json                     ← plugin manifest
+install.sh                                     ← manual installer
 
 plugins/stage-manager/skills/
   yagni/SKILL.md
@@ -136,7 +151,7 @@ stage-manager-soul.md     ← the animating philosophy
 
 ## Using These Skills
 
-**With Claude Code** — Run `bash install.sh`. All 16 skills appear as slash commands.
+**With Claude Code** — Install via `claude plugin add --transport=github Mnfst-AI/Stage_Manager_Skills` or run `bash install.sh`. All 16 skills appear as slash commands.
 
 **With Cursor, Replit, or any AI coding tool** — Reference a skill file in your project's instructions or rules file.
 
