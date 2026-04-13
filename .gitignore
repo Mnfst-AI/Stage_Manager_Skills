@@ -6,3 +6,5 @@ docs/
 
 # Claude Code local settings
 .claude/
+.practitioner/
+.practitioner

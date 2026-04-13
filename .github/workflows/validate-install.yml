@@ -189,7 +189,21 @@ jobs:
           fi
           echo "✓  All files consistent — $DISK_COUNT skills everywhere"
 
-  # ── Job 3: Install script dry-run ─────────────────────────────────────────
+  # ── Job 3: Shellcheck lint ────────────────────────────────────────────────
+  shellcheck:
+    name: Shellcheck lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint install scripts
+        run: |
+          shellcheck install.sh
+          echo "✓  install.sh — shellcheck passed"
+          shellcheck install-practitioner.sh
+          echo "✓  install-practitioner.sh — shellcheck passed"
+
+  # ── Job 4: Install script dry-run ─────────────────────────────────────────
   dry-run-installer:
     name: Dry-run install script
     runs-on: ubuntu-latest
@@ -217,3 +231,49 @@ jobs:
             exit 1
           fi
           echo "✓  install.sh linked all $INSTALLED_COUNT skills"
+
+  # ── Job 5: Session Mirror installer dry-run ──────────────────────────────
+  dry-run-practitioner:
+    name: Dry-run session mirror installer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Dry-run install-practitioner.sh
+        run: |
+          FAKE_HOME=$(mktemp -d)
+          HOME="$FAKE_HOME" bash install-practitioner.sh
+          echo ""
+          echo "✓  install-practitioner.sh — no fatal errors"
+
+      - name: Verify session mirror files created
+        run: |
+          FAKE_HOME=$(mktemp -d)
+          HOME="$FAKE_HOME" bash install-practitioner.sh > /dev/null 2>&1
+
+          MDIR="$FAKE_HOME/.stage-manager"
+          ERRORS=0
+          for f in session-journal.md CLAUDE.md; do
+            if [ ! -f "$MDIR/$f" ]; then
+              echo "::error::Missing file: $f"
+              ERRORS=$((ERRORS + 1))
+            fi
+          done
+
+          if [ ! -L ".practitioner" ]; then
+            echo "::error::Symlink .practitioner not created"
+            ERRORS=$((ERRORS + 1))
+          fi
+
+          if [ "$ERRORS" -gt 0 ]; then
+            echo "❌ $ERRORS file(s) missing"
+            exit 1
+          fi
+          echo "✓  All session mirror files created"
+
+      - name: Verify idempotent re-run
+        run: |
+          FAKE_HOME=$(mktemp -d)
+          HOME="$FAKE_HOME" bash install-practitioner.sh > /dev/null 2>&1
+          HOME="$FAKE_HOME" bash install-practitioner.sh > /dev/null 2>&1
+          echo "✓  install-practitioner.sh — idempotent re-run succeeded"
