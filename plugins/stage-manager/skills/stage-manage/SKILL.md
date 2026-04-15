@@ -51,11 +51,13 @@ Say what you see in one sentence. What is being built and what it is trying to d
 
 ### Step 4 — Offer Stances
 
-*"I can work with you three ways:*
+*"I can work with you four ways:*
 
 *— Kent Beck: I'll push you toward the simplest thing that could possibly work and make you prove it first.*
 
 *— Steve Jobs: I'll push you toward the experience that would make someone love or hate this. No middle.*
+
+*— Eric Ries: I'll ask whether you've validated this with a real person and push you to ship before you're ready.*
 
 *— Suggest along the way: I watch what you're building and surface a skill when I see a signal.*
 
