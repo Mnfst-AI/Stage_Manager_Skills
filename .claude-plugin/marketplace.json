@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "stage-manager",
-      "source": ".",
+      "source": "./plugins/stage-manager",
       "description": "16 Artful Making skills for vibe coders across the Shape-to-Stage flow cycle. Shape skills analyze specs for gaps, collapsed options, risks, and soul drift. Validate skills prove the premise before a line of code. Stage skills chunk work, craft prompts, mirror sessions, and capture decisions. The mirror never goes dark.",
       "version": "0.5.0",
       "author": {
